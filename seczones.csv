@@ -1,0 +1,11 @@
+fwName,securityzoneName,interfaceMode
+Site1-FW,Site1-Wired,ROUTED
+Site1-FW,Site1-Wireless,ROUTED
+Site1-FW,Site1-Users,ROUTED
+Site1-FW,Site1-Outside,ROUTED
+Site1-FW,Site1-DC1_VPN,ROUTED
+Site2-FW,Site2-Wired,ROUTED
+Site2-FW,Site2-Wireless,ROUTED
+Site2-FW,Site2-Users,ROUTED
+Site2-FW,Site2-Outside,ROUTED
+Site2-FW,Site2-DC1_VPN,ROUTED

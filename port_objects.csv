@@ -1,0 +1,5 @@
+firewallName,objectGroup,objectName,protocol,port
+Global,Global_Web_Port_Group,InSecure_Web,TCP,80
+Global,Global_Web_Port_Group,Secure_Web,TCP,433
+Global,Global_Domain_Svcs_Port_Group,InSecure_DNS,UDP,53
+Global,Global_Domain_Svcs_Port_Group,Secure_DNSoTLS,TCP,853
