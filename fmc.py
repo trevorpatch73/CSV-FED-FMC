@@ -510,12 +510,15 @@ def create_security_rules():
             ruleName = row['ruleName']
             print(f'ruleName is mapped too: {ruleName}')
 
+            action = row['action']
+            print(f'action is mapped too: {action}')
+
             filename = firewallName + "-" + ruleName + "_accessrule.json"
 
             if not os.path.exists(filename):
 
                 with open(filename, mode='w') as f:
-                    start = {"action": "ALLOW", "enabled": True, "type": "AccessRule", "name": f"{ruleName}", "sendEventsToFMC": True, "logFiles": False, "logBegin": False, "logEnd": True, "vlanTags": {}, "sourceZones": {"objects": []}, "destinationZones": {"objects": [
+                    start = {"action": f"{action}", "enabled": True, "type": "AccessRule", "name": f"{ruleName}", "sendEventsToFMC": True, "logFiles": False, "logBegin": False, "logEnd": True, "vlanTags": {}, "sourceZones": {"objects": []}, "destinationZones": {"objects": [
                     ]}, "sourceNetworks": {"objects": []}, "destinationNetworks": {"objects": []}, "destinationPorts": {"objects": []}, "sourceDynamicObjects": {}, "destinationDynamicObjects": {}, "newComments": ["ASA Configuration migrated by PRESIDIO GOVERNMENT SOLUTIONS"]}
                     json.dump(start, f)
                     sleep(1)
