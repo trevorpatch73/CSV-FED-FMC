@@ -1,0 +1,37 @@
+firewallName,objectGroup,objectType,objectName,objectValue,objectDescription
+Global,Global-Blocked-IPv4,Host,HOST-2-2-2-2,2.2.2.2,Migrated from ASA via Presidio Government Solution
+Global,Global-Blocked-IPv4,Host,HOST-4-4-4-4,4.4.4.4,Migrated from ASA via Presidio Government Solution
+Global,Global-Blocked-IPv4,Host,HOST-8-8-8-8,8.8.8.8,Migrated from ASA via Presidio Government Solution
+Global,Agency-SuperNet,Network,NET-10-0-0-0_8,10.0.0.0/8,Migrated from ASA via Presidio Government Solution
+Global,Agency-SuperNet,Network,NET-172-16-0-0_12,172.16.0.0/12,Migrated from ASA via Presidio Government Solution
+Global,Agency-SuperNet,Network,NET-192_168_0_0_16,192.168.0.0/16,Migrated from ASA via Presidio Government Solution
+DC-FW,DC1-SuperNet,Network,NET-10-0-0-0_22,10.0.0.0/22,Migrated from ASA via Presidio Government Solution
+Site1-FW,Site1-SuperNet,Network,NET-30-0-0-0_22,30.0.0.0/22,Migrated from ASA via Presidio Government Solution
+Site1-FW,Site1-Wired,Network,NET-30-0-1-0_24,30.0.1.0/24,Migrated from ASA via Presidio Government Solution
+Site1-FW,Site1-Wireless,Network,NET-30-0-2-0_24,30.0.2.0/24,Migrated from ASA via Presidio Government Solution
+Site1-FW,Site1-L1A-User_Network,Host,HOST-30-0-3-10,30.0.3.10,Migrated from ASA via Presidio Government Solution
+Site1-FW,Site1-L1A-User_Network,Host,HOST-30-0-3-11,30.0.3.11,Migrated from ASA via Presidio Government Solution
+Site1-FW,Site1-L1IA-User_Network,Network,NET-30-0-3-0_24,30.0.3.0/24,Migrated from ASA via Presidio Government Solution
+Site1-FW,Site1-L1A-Blocked-IPv4,Host,HOST-2-2-2-2,2.2.2.2,Migrated from ASA via Presidio Government Solution
+Site1-FW,Site1-L1A-Blocked-IPv4,Host,HOST-4-4-4-4,4.4.4.4,Migrated from ASA via Presidio Government Solution
+Site1-FW,Site1-L1A-Blocked-IPv4,Host,HOST-8-8-8-8,8.8.8.8,Migrated from ASA via Presidio Government Solution
+Site1-FW,Site1-L1IA-Branch-DNS-DHCP-Server ,Host,HOST-30-0-3-158,30.0.3.158,Migrated from ASA via Presidio Government Solution
+Site1-FW,Site1-L1IA-Blocked-IPv4,Host,HOST-16-16-16-16,16.16.16.16,Migrated from ASA via Presidio Government Solution
+Site1-FW,Site1-L4IA-User_Network,Host,HOST-30-0-3-10,30.0.3.10,Migrated from ASA via Presidio Government Solution
+Site1-FW,Site1-L4IA-User_Network,Host,HOST-30-0-3-11,30.0.3.11,Migrated from ASA via Presidio Government Solution
+Site1-FW,Site1-L1IA-Branch-DNS-DHCP-Server,Host,HOST-30-0-3-159,30.0.3.159,Migrated from ASA via Presidio Government Solution
+Site2-FW,Site2-SuperNet,Network,NET-30-0-4-0_22,30.0.4.0/22,Migrated from ASA via Presidio Government Solution
+Site2-FW,Site2-Wired,Network,NET-30-0-5-0_24,30.0.5.0/24,Migrated from ASA via Presidio Government Solution
+Site2-FW,Site2-Wireless,Network,NET-30-0-6-0_24,30.0.6.0/24,Migrated from ASA via Presidio Government Solution
+Site2-FW,Site2-L1A-User_Network,Host,HOST-30-0-5-10,30.0.5.10,Migrated from ASA via Presidio Government Solution
+Site2-FW,Site2-L1A-User_Network,Host,HOST-30-0-6-11,30.0.6.11,Migrated from ASA via Presidio Government Solution
+Site2-FW,Site2-L1IA-User_Network,Network,NET-30-0-7-0_24,30.0.7.0/24,Migrated from ASA via Presidio Government Solution
+Site2-FW,Site2-L1A-Blocked-IPv4,Host,HOST-2-2-2-2,2.2.2.2,Migrated from ASA via Presidio Government Solution
+Site2-FW,Site2-L1A-Blocked-IPv4,Host,HOST-4-4-4-4,4.4.4.4,Migrated from ASA via Presidio Government Solution
+Site2-FW,Site2-L1A-Blocked-IPv4,Host,HOST-8-8-8-8,8.8.8.8,Migrated from ASA via Presidio Government Solution
+Site2-FW,Site2-L1IA-Branch-DNS-DHCP-Server ,Host,HOST-30-0-7-158,30.0.7.158,Migrated from ASA via Presidio Government Solution
+Site2-FW,Site1-L1IA-Blocked-IPv4,Host,HOST-16-16-16-16,16.16.16.16,Migrated from ASA via Presidio Government Solution
+Site2-FW,Site2-L4IA-User_Network,Host,HOST-30-0-5-10,30.0.3.10,Migrated from ASA via Presidio Government Solution
+Site2-FW,Site2-L4IA-User_Network,Host,HOST-30-0-5-11,30.0.3.11,Migrated from ASA via Presidio Government Solution
+Site2-FW,Site2-L1IA-Branch-DNS-DHCP-Server,Host,HOST-30-0-5-159,30.0.5.159,Migrated from ASA via Presidio Government Solution
+Site2-FW,Site2-L1IA-Blocked-IPv4,Host,HOST-16-16-16-16,16.16.16.16,Migrated from ASA via Presidio Government Solution
