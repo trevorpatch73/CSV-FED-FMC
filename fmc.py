@@ -24,7 +24,7 @@ def basic_auth():
 
 def create_security_zones():
     domainUUID, XAuthAccessToken = basic_auth()
-    with open('seczones.csv') as csv_file:
+    with open('csv_files/seczones.csv') as csv_file:
         csv_reader = csv.DictReader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
@@ -61,7 +61,7 @@ def create_security_zones():
 
 def create_access_policy():
     domainUUID, XAuthAccessToken = basic_auth()
-    with open('acspol.csv') as csv_file:
+    with open('csv_files/acspol.csv') as csv_file:
         csv_reader = csv.DictReader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
@@ -95,7 +95,7 @@ def create_access_policy():
 
 def create_network_objects():
     domainUUID, XAuthAccessToken = basic_auth()
-    with open('network_objects.csv') as csv_file:
+    with open('csv_files/network_objects.csv') as csv_file:
         csv_reader = csv.DictReader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
@@ -162,16 +162,16 @@ def create_network_objects():
                 firewallName = row['firewallName']
                 print(f'firewallName is mapped too: {firewallName}')
 
-                if not os.path.exists(firewallName + "-" + objectGroup + "_objectgroup.json"):
+                if not os.path.exists('json_files/' + firewallName + "-" + objectGroup + "_objectgroup.json"):
 
                     filename = firewallName + "-" + objectGroup + "_objectgroup.json"
 
-                    with open(filename, mode='w') as f:
+                    with open('json_files/' + filename, mode='w') as f:
                         start = {"name": f"{firewallName}" + "-" +
                                  f"{objectGroup}", "objects": [], "type": "NetworkGroup"}
                         json.dump(start, f)
 
-                    with open(filename, "r") as file:
+                    with open('json_files/' + filename, "r") as file:
                         data = json.load(file)
                         temp = data["objects"]
                         entry = {"type": f"{objectType}",
@@ -179,14 +179,14 @@ def create_network_objects():
                         print(entry)
                         temp.append(entry)
 
-                        with open(filename, "w") as file:
+                        with open('json_files/' + filename, "w") as file:
                             json.dump(data, file)
 
                 else:
 
                     filename = firewallName + "-" + objectGroup + "_objectgroup.json"
 
-                    with open(filename, "r") as file:
+                    with open('json_files/' + filename, "r") as file:
                         data = json.load(file)
                         temp = data["objects"]
                         entry = {"type": f"{objectType}",
@@ -194,7 +194,7 @@ def create_network_objects():
                         print(entry)
                         temp.append(entry)
 
-                        with open(filename, "w") as file:
+                        with open('json_files/' + filename, "w") as file:
                             json.dump(data, file)
 
             elif objectType == "Host":
@@ -239,16 +239,16 @@ def create_network_objects():
                 firewallName = row['firewallName']
                 print(f'firewallName is mapped too: {firewallName}')
 
-                if not os.path.exists(firewallName + "-" + objectGroup + "_objectgroup.json"):
+                if not os.path.exists('json_files/' + firewallName + "-" + objectGroup + "_objectgroup.json"):
 
                     filename = firewallName + "-" + objectGroup + "_objectgroup.json"
 
-                    with open(filename, mode='w') as f:
+                    with open('json_files/' + filename, mode='w') as f:
                         start = {"name": f"{objectGroup}",
                                  "objects": [], "type": "NetworkGroup"}
                         json.dump(start, f)
 
-                    with open(filename, "r") as file:
+                    with open('json_files/' + filename, "r") as file:
                         data = json.load(file)
                         temp = data["objects"]
                         entry = {"type": f"{objectType}",
@@ -256,13 +256,13 @@ def create_network_objects():
                         print(entry)
                         temp.append(entry)
 
-                        with open(filename, "w") as file:
+                        with open('json_files/' + filename, "w") as file:
                             json.dump(data, file)
                 else:
 
                     filename = firewallName + "-" + objectGroup + "_objectgroup.json"
 
-                    with open(filename, "r") as file:
+                    with open('json_files/' + filename, "r") as file:
                         data = json.load(file)
                         temp = data["objects"]
                         entry = {"type": f"{objectType}",
@@ -270,14 +270,14 @@ def create_network_objects():
                         print(entry)
                         temp.append(entry)
 
-                        with open(filename, "w") as file:
+                        with open('json_files/' + filename, "w") as file:
                             json.dump(data, file)
 
             else:
                 print(
                     f'The object type, {objectType}, does not match the script logic. Please double check your inputs.')
 
-    with open('network_objects.csv') as csv_file:
+    with open('csv_files/network_objects.csv') as csv_file:
 
         csv_reader = csv.DictReader(csv_file, delimiter=',')
         line_count = 0
@@ -298,7 +298,7 @@ def create_network_objects():
                           'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
 
             response = requests.post(url, data=open(
-                filename, 'rb'), headers=newHeaders, verify=False)
+                'json_files/' + filename, 'rb'), headers=newHeaders, verify=False)
 
             print(response.request.url)
             print(response.request.headers)
@@ -311,7 +311,7 @@ def create_port_objects():
 
     domainUUID, XAuthAccessToken = basic_auth()
 
-    with open('port_objects.csv') as csv_file:
+    with open('csv_files/port_objects.csv') as csv_file:
         csv_reader = csv.DictReader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
@@ -382,40 +382,40 @@ def create_port_objects():
                         f'Could not locate a protocol port object called, {objectName}')
                 item_count += 1
 
-            if not os.path.exists(firewallName + "-" + objectGroup + "_objectgroup.json"):
+            if not os.path.exists('json_files/' + firewallName + "-" + objectGroup + "_objectgroup.json"):
 
                 filename = firewallName + "-" + objectGroup + "_objectgroup.json"
 
-                with open(filename, mode='w') as f:
+                with open('json_files/' + filename, mode='w') as f:
                     start = {"name": f"{objectGroup}",
                              "objects": [], "type": "PortObjectGroup"}
                     json.dump(start, f)
 
-                with open(filename, "r") as file:
+                with open('json_files/' + filename, "r") as file:
                     data = json.load(file)
                     temp = data["objects"]
                     entry = {"id": f"{portUUID}", "type": "ProtocolPortObject"}
                     print(entry)
                     temp.append(entry)
 
-                    with open(filename, "w") as file:
+                    with open('json_files/' + filename, "w") as file:
                         json.dump(data, file)
 
             else:
 
                 filename = firewallName + "-" + objectGroup + "_objectgroup.json"
 
-                with open(filename, "r") as file:
+                with open('json_files/' + filename, "r") as file:
                     data = json.load(file)
                     temp = data["objects"]
                     entry = {"id": f"{portUUID}", "type": "ProtocolPortObject"}
                     print(entry)
                     temp.append(entry)
 
-                    with open(filename, "w") as file:
+                    with open('json_files/' + filename, "w") as file:
                         json.dump(data, file)
 
-    with open('port_objects.csv') as csv_file:
+    with open('csv_files/port_objects.csv') as csv_file:
 
         csv_reader = csv.DictReader(csv_file, delimiter=',')
         line_count = 0
@@ -436,7 +436,7 @@ def create_port_objects():
                           'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
 
             response = requests.post(url, data=open(
-                filename, 'rb'), headers=newHeaders, verify=False)
+                'json_files/' + filename, 'rb'), headers=newHeaders, verify=False)
 
             print(response.request.url)
             print(response.request.headers)
@@ -447,7 +447,7 @@ def create_port_objects():
 
 def create_security_rules():
     domainUUID, XAuthAccessToken = basic_auth()
-    with open('secrules.csv') as csv_file:
+    with open('csv_files/secrules.csv') as csv_file:
         csv_reader = csv.DictReader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
@@ -515,15 +515,15 @@ def create_security_rules():
 
             filename = firewallName + "-" + ruleName + "_accessrule.json"
 
-            if not os.path.exists(filename):
+            if not os.path.exists('json_files/' + filename):
 
-                with open(filename, mode='w') as f:
+                with open('json_files/' + filename, mode='w') as f:
                     start = {"action": f"{action}", "enabled": True, "type": "AccessRule", "name": f"{ruleName}", "sendEventsToFMC": True, "logFiles": False, "logBegin": False, "logEnd": True, "vlanTags": {}, "sourceZones": {"objects": []}, "destinationZones": {"objects": [
                     ]}, "sourceNetworks": {"objects": []}, "destinationNetworks": {"objects": []}, "destinationPorts": {"objects": []}, "sourceDynamicObjects": {}, "destinationDynamicObjects": {}, "newComments": ["ASA Configuration migrated by PRESIDIO GOVERNMENT SOLUTIONS"]}
                     json.dump(start, f)
                     sleep(1)
 
-                with open(filename, "r") as file:
+                with open('json_files/' + filename, "r") as file:
 
                     srcZone = row['srcZone']
                     print(f'srcZone is mapped too: {srcZone}')
@@ -562,10 +562,10 @@ def create_security_rules():
                         print(entry)
                         temp.append(entry)
 
-                        with open(filename, "w") as file:
+                        with open('json_files/' + filename, "w") as file:
                             json.dump(data, file)
 
-                with open(filename, "r") as file:
+                with open('json_files/' + filename, "r") as file:
 
                     destZone = row['destZone']
                     print(f'destZone is mapped too: {destZone}')
@@ -605,10 +605,10 @@ def create_security_rules():
                         print(entry)
                         temp.append(entry)
 
-                        with open(filename, "w") as file:
+                        with open('json_files/' + filename, "w") as file:
                             json.dump(data, file)
 
-                with open(filename, "r") as file:
+                with open('json_files/' + filename, "r") as file:
 
                     srcNetGrp = row['srcNetworkGroup']
                     print(f'srcNetGrp is mapped too: {srcNetGrp}')
@@ -640,10 +640,10 @@ def create_security_rules():
                         print(entry)
                         temp.append(entry)
 
-                        with open(filename, "w") as file:
+                        with open('json_files/' + filename, "w") as file:
                             json.dump(data, file)
 
-                with open(filename, "r") as file:
+                with open('json_files/' + filename, "r") as file:
 
                     destNetGrp = row['destNetworkGroup']
                     print(f'destNetGrp is mapped too: {destNetGrp}')
@@ -676,10 +676,10 @@ def create_security_rules():
                         print(entry)
                         temp.append(entry)
 
-                        with open(filename, "w") as file:
+                        with open('json_files/' + filename, "w") as file:
                             json.dump(data, file)
 
-                with open(filename, "r") as file:
+                with open('json_files/' + filename, "r") as file:
 
                     destPortGrp = row['destPortGroup']
                     print(f'destPortGrp is mapped too: {destPortGrp}')
@@ -711,203 +711,10 @@ def create_security_rules():
                         print(entry)
                         temp.append(entry)
 
-                        with open(filename, "w") as file:
+                        with open('json_files/' + filename, "w") as file:
                             json.dump(data, file)
 
-                        with open(filename, "r") as file:
-
-                            srcZone = row['srcZone']
-                            print(f'srcZone is mapped too: {srcZone}')
-
-                            if srcZone != "any":
-
-                                url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/securityzones'
-
-                                newHeaders = {'Content-type': 'application/json',
-                                              'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
-
-                                response = requests.get(
-                                    url, headers=newHeaders, verify=False)
-
-                                print(response.request.url)
-                                print(response.request.headers)
-                                print(response.status_code)
-                                print(response.content)
-
-                                response_json = response.json()
-                                items_list = response_json["items"]
-                                item_count = 0
-                                for item in items_list:
-                                    if (items_list[item_count]['name'] == srcZone):
-                                        print(item)
-                                        print("-------------------")
-                                        srcZoneUUID = items_list[item_count]['id']
-                                        print(
-                                            f'Source Zone UUID is {srcZoneUUID}')
-
-                                    item_count += 1
-
-                                data = json.load(file)
-                                temp = data["sourceZones"]["objects"]
-                                entry = {
-                                    "name": f"{srcZone}", "id": f"{srcZoneUUID}", "type": "SecurityZone"}
-                                print(entry)
-                                temp.append(entry)
-
-                                with open(filename, "w") as file:
-                                    json.dump(data, file)
-
-                        with open(filename, "r") as file:
-
-                            destZone = row['destZone']
-                            print(f'destZone is mapped too: {destZone}')
-
-                            if destZone != "any":
-
-                                url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/securityzones'
-
-                                newHeaders = {'Content-type': 'application/json',
-                                              'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
-
-                                response = requests.get(
-                                    url, headers=newHeaders, verify=False)
-
-                                print(response.request.url)
-                                print(response.request.headers)
-                                print(response.status_code)
-                                print(response.content)
-
-                                response_json = response.json()
-                                items_list = response_json["items"]
-                                item_count = 0
-                                for item in items_list:
-                                    if (items_list[item_count]['name'] == destZone):
-                                        print(item)
-                                        print("-------------------")
-                                        destZoneUUID = items_list[item_count]['id']
-                                        print(
-                                            f'Destination Zone UUID is {destZoneUUID}')
-
-                                    item_count += 1
-
-                                data = json.load(file)
-                                temp = data["destinationZones"]["objects"]
-                                entry = {
-                                    "name": f"{destZone}", "id": f"{destZoneUUID}", "type": "SecurityZone"}
-                                print(entry)
-                                temp.append(entry)
-
-                                with open(filename, "w") as file:
-                                    json.dump(data, file)
-
-                        with open(filename, "r") as file:
-
-                            srcNetGrp = row['srcNetworkGroup']
-                            print(f'srcNetGrp is mapped too: {srcNetGrp}')
-
-                            if srcNetGrp != "any":
-
-                                url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{srcNetGrp}'
-
-                                newHeaders = {'Content-type': 'application/json',
-                                              'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
-
-                                response = requests.get(
-                                    url, headers=newHeaders, verify=False)
-
-                                print(response.request.url)
-                                print(response.request.headers)
-                                print(response.status_code)
-                                print(response.content)
-
-                                response_json = response.json()
-
-                                srcNetGrpUUID = response_json['items'][0]['id']
-                                print(
-                                    f'Source Network Group UUID is {srcNetGrpUUID}')
-
-                                data = json.load(file)
-                                temp = data["sourceNetworks"]["objects"]
-                                entry = {"type": "NetworkGroup", "overridable": False,
-                                         "id": f"{srcNetGrpUUID}", "name": f"{srcNetGrp}"}
-                                print(entry)
-                                temp.append(entry)
-
-                                with open(filename, "w") as file:
-                                    json.dump(data, file)
-
-                        with open(filename, "r") as file:
-
-                            destNetGrp = row['destNetworkGroup']
-                            print(f'destNetGrp is mapped too: {destNetGrp}')
-
-                            if destNetGrp != "any":
-
-                                url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{destNetGrp}'
-
-                                newHeaders = {'Content-type': 'application/json',
-                                              'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
-
-                                response = requests.get(
-                                    url, headers=newHeaders, verify=False)
-
-                                print(response.request.url)
-                                print(response.request.headers)
-                                print(response.status_code)
-                                print(response.content)
-
-                                response_json = response.json()
-
-                                destNetGrpUUID = response_json['items'][0]['id']
-                                print(
-                                    f'Destination Network Group UUID is {destNetGrpUUID}')
-
-                                data = json.load(file)
-                                temp = data["destinationNetworks"]["objects"]
-                                entry = {"type": "NetworkGroup", "overridable": False,
-                                         "id": f"{destNetGrpUUID}", "name": f"{destNetGrp}"}
-                                print(entry)
-                                temp.append(entry)
-
-                                with open(filename, "w") as file:
-                                    json.dump(data, file)
-
-                        with open(filename, "r") as file:
-
-                            destPortGrp = row['destPortGroup']
-                            print(f'destPortGrp is mapped too: {destPortGrp}')
-
-                            if destPortGrp != "any":
-
-                                url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/portobjectgroups?filter=nameOrValue%3A{destPortGrp}'
-
-                                newHeaders = {'Content-type': 'application/json',
-                                              'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
-
-                                response = requests.get(
-                                    url, headers=newHeaders, verify=False)
-
-                                print(response.request.url)
-                                print(response.request.headers)
-                                print(response.status_code)
-                                print(response.content)
-
-                                response_json = response.json()
-                                destPortGrpUUID = response_json['items'][0]['id']
-                                print(
-                                    f'Destination Port Group UUID is {destPortGrpUUID}')
-
-                                data = json.load(file)
-                                temp = data["destinationPorts"]["objects"]
-                                entry = {"type": "PortObjectGroup", "overridable": False,
-                                         "id": f"{destPortGrpUUID}", "name": f"{destPortGrp}"}
-                                print(entry)
-                                temp.append(entry)
-
-                                with open(filename, "w") as file:
-                                    json.dump(data, file)
-
-    with open('secrules.csv') as csv_file:
+    with open('csv_files/secrules.csv') as csv_file:
 
         csv_reader = csv.DictReader(csv_file, delimiter=',')
         line_count = 0
@@ -959,13 +766,45 @@ def create_security_rules():
                           'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
 
             response = requests.post(url, data=open(
-                filename, 'rb'), headers=newHeaders, verify=False)
+                'json_files/' + filename, 'rb'), headers=newHeaders, verify=False)
 
             print(response.request.url)
             print(response.request.headers)
             print(response.request.body)
             print(response.status_code)
             print(response.content)
+
+
+def create_nat():
+    domainUUID, XAuthAccessToken = basic_auth()
+    with open('csv_files/natrules.csv') as csv_file:
+        csv_reader = csv.DictReader(csv_file, delimiter=',')
+        line_count = 0
+        for row in csv_reader:
+            NatPolicy = row['NatPolicy']
+            print(f'NAT POLICY is mapped too: {NatPolicy}')
+
+            dataDict = {
+                "type": "FTDNatPolicy",
+                "name": NatPolicy,
+                "description": "NAT POLICY CREATED BY PRESIDIO GOVERNMENT SOLUTIONS"
+            }
+
+            jsonData = json.dumps(dataDict)
+
+            url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/policy/ftdnatpolicies '
+
+            newHeaders = {'Content-type': 'application/json',
+                          'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+            response = requests.post(
+                url, headers=newHeaders, data=jsonData, verify=False)
+
+            print(response.request.url)
+            print(response.request.headers)
+            print(response.request.body)
+            print(response.status_code)
+            print(response.headers)
 
 
 while True:
