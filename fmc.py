@@ -1509,7 +1509,7 @@ def create_nat():
                 item_count += 1
 
             if "manual" in ruleType:
-                url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/policy/ftdnatpolicies/{containerUUID}/manualnatrules'
+                url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/policy/ftdnatpolicies/{containerUUID}/manualnatrules?section=before_auto'
             elif "auto" in ruleType:
                 url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/policy/ftdnatpolicies/{containerUUID}/autonatrules'
             else:
