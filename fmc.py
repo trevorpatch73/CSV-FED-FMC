@@ -936,7 +936,14 @@ def create_nat():
                     print(
                         f'originalSourceGroup is mapped too: {originalSourceGroup}')
 
-                    url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalSource}'
+                    if "TRUE" in originalSourceGroup:
+                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalSource}'
+                    elif "FALSE" in originalSourceGroup:
+                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{originalSource}'
+                    else:
+                        print(
+                            "error in originalSourceGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
+                        print(f"originalSourceGroup is {originalSourceGroup}")
 
                     newHeaders = {'Content-type': 'application/json',
                                   'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
@@ -999,7 +1006,15 @@ def create_nat():
                     print(
                         f'originalDestinationGroup is mapped too: {originalDestinationGroup}')
 
-                    url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalDestination}'
+                    if "TRUE" in originalDestinationGroup:
+                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalDestination}'
+                    elif "FALSE" in originalDestinationGroup:
+                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{originalDestination}'
+                    else:
+                        print(
+                            "error in originalDestinationGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
+                        print(
+                            f"originalDestinationGroup is {originalDestinationGroup}")
 
                     newHeaders = {'Content-type': 'application/json',
                                   'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
@@ -1064,7 +1079,15 @@ def create_nat():
 
                     if translatedSource != "ignore":
 
-                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedSource}'
+                        if "TRUE" in translatedSourceGroup:
+                            url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedSource}'
+                        elif "FALSE" in translatedSourceGroup:
+                            url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{translatedSource}'
+                        else:
+                            print(
+                                "error in translatedSourceGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
+                            print(
+                                f"translatedSourceGroup is {translatedSourceGroup}")
 
                         newHeaders = {'Content-type': 'application/json',
                                       'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
@@ -1081,7 +1104,7 @@ def create_nat():
                         items_list = response_json["items"]
                         item_count = 0
                         for item in items_list:
-                            if (items_list[item_count]['name'] == firewallName + "-" + translatedSource):
+                            if (items_list[item_count]['name'] == firewallName + translatedSource):
                                 print(item)
                                 print("-------------------")
                                 translatedSourceUUID = items_list[item_count]['id']
@@ -1129,7 +1152,15 @@ def create_nat():
 
                     if translatedDestination != "ignore":
 
-                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedDestination}'
+                        if "TRUE" in translatedDestinationGroup:
+                            url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedDestination}'
+                        elif "FALSE" in translatedDestinationGroup:
+                            url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{translatedDestination}'
+                        else:
+                            print(
+                                "error in originalDestinationGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
+                            print(
+                                f"translatedDestinationGroup is {translatedDestinationGroup}")
 
                         newHeaders = {'Content-type': 'application/json',
                                       'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
@@ -1146,7 +1177,7 @@ def create_nat():
                         items_list = response_json["items"]
                         item_count = 0
                         for item in items_list:
-                            if (items_list[item_count]['name'] == firewallName + "-" + translatedDestination):
+                            if (items_list[item_count]['name'] == firewallName + translatedDestination):
                                 print(item)
                                 print("-------------------")
                                 translatedDestinationUUID = items_list[item_count]['id']
@@ -1278,7 +1309,14 @@ def create_nat():
                     print(
                         f'originalSourceGroup is mapped too: {originalSourceGroup}')
 
-                    url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalSource}'
+                    if "TRUE" in originalSourceGroup:
+                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalSource}'
+                    elif "FALSE" in originalSourceGroup:
+                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{originalSource}'
+                    else:
+                        print(
+                            "error in originalSourceGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
+                        print(f"originalSourceGroup is {originalSourceGroup}")
 
                     newHeaders = {'Content-type': 'application/json',
                                   'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
@@ -1341,7 +1379,15 @@ def create_nat():
                     print(
                         f'originalDestinationGroup is mapped too: {originalDestinationGroup}')
 
-                    url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalDestination}'
+                    if "TRUE" in originalDestinationGroup:
+                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalDestination}'
+                    elif "FALSE" in originalDestinationGroup:
+                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{originalDestination}'
+                    else:
+                        print(
+                            "error in originalDestinationGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
+                        print(
+                            f"originalDestinationGroup is {originalDestinationGroup}")
 
                     newHeaders = {'Content-type': 'application/json',
                                   'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
@@ -1406,7 +1452,15 @@ def create_nat():
 
                     if translatedSource != "ignore":
 
-                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedSource}'
+                        if "TRUE" in translatedSourceGroup:
+                            url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedSource}'
+                        elif "FALSE" in translatedSourceGroup:
+                            url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{translatedSource}'
+                        else:
+                            print(
+                                "error in translatedSourceGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
+                            print(
+                                f"translatedSourceGroup is {translatedSourceGroup}")
 
                         newHeaders = {'Content-type': 'application/json',
                                       'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
@@ -1423,7 +1477,7 @@ def create_nat():
                         items_list = response_json["items"]
                         item_count = 0
                         for item in items_list:
-                            if (items_list[item_count]['name'] == firewallName + "-" + translatedSource):
+                            if (items_list[item_count]['name'] == firewallName + translatedSource):
                                 print(item)
                                 print("-------------------")
                                 translatedSourceUUID = items_list[item_count]['id']
@@ -1471,7 +1525,15 @@ def create_nat():
 
                     if translatedDestination != "ignore":
 
-                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedDestination}'
+                        if "TRUE" in translatedDestinationGroup:
+                            url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedDestination}'
+                        elif "FALSE" in translatedDestinationGroup:
+                            url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{translatedDestination}'
+                        else:
+                            print(
+                                "error in originalDestinationGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
+                            print(
+                                f"translatedDestinationGroup is {translatedDestinationGroup}")
 
                         newHeaders = {'Content-type': 'application/json',
                                       'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
@@ -1488,7 +1550,7 @@ def create_nat():
                         items_list = response_json["items"]
                         item_count = 0
                         for item in items_list:
-                            if (items_list[item_count]['name'] == firewallName + "-" + translatedDestination):
+                            if (items_list[item_count]['name'] == firewallName + translatedDestination):
                                 print(item)
                                 print("-------------------")
                                 translatedDestinationUUID = items_list[item_count]['id']
