@@ -953,7 +953,7 @@ def create_nat():
                     items_list = response_json["items"]
                     item_count = 0
                     for item in items_list:
-                        if (items_list[item_count]['name'] == firewallName + originalSource):
+                        if (items_list[item_count]['name'] == firewallName + "-" + originalSource):
                             print(item)
                             print("-------------------")
                             originalSourceUUID = items_list[item_count]['id']
@@ -1016,7 +1016,7 @@ def create_nat():
                     items_list = response_json["items"]
                     item_count = 0
                     for item in items_list:
-                        if (items_list[item_count]['name'] == firewallName + originalDestination):
+                        if (items_list[item_count]['name'] == firewallName + "-" + originalDestination):
                             print(item)
                             print("-------------------")
                             originalDestinationUUID = items_list[item_count]['id']
@@ -1081,7 +1081,7 @@ def create_nat():
                         items_list = response_json["items"]
                         item_count = 0
                         for item in items_list:
-                            if (items_list[item_count]['name'] == firewallName + translatedSource):
+                            if (items_list[item_count]['name'] == firewallName + "-" + translatedSource):
                                 print(item)
                                 print("-------------------")
                                 translatedSourceUUID = items_list[item_count]['id']
@@ -1146,7 +1146,7 @@ def create_nat():
                         items_list = response_json["items"]
                         item_count = 0
                         for item in items_list:
-                            if (items_list[item_count]['name'] == firewallName + translatedDestination):
+                            if (items_list[item_count]['name'] == firewallName + "-" + translatedDestination):
                                 print(item)
                                 print("-------------------")
                                 translatedDestinationUUID = items_list[item_count]['id']
@@ -1295,7 +1295,7 @@ def create_nat():
                     items_list = response_json["items"]
                     item_count = 0
                     for item in items_list:
-                        if (items_list[item_count]['name'] == firewallName + originalSource):
+                        if (items_list[item_count]['name'] == firewallName + "-" + originalSource):
                             print(item)
                             print("-------------------")
                             originalSourceUUID = items_list[item_count]['id']
@@ -1358,7 +1358,7 @@ def create_nat():
                     items_list = response_json["items"]
                     item_count = 0
                     for item in items_list:
-                        if (items_list[item_count]['name'] == firewallName + originalDestination):
+                        if (items_list[item_count]['name'] == firewallName + "-" + originalDestination):
                             print(item)
                             print("-------------------")
                             originalDestinationUUID = items_list[item_count]['id']
@@ -1423,7 +1423,7 @@ def create_nat():
                         items_list = response_json["items"]
                         item_count = 0
                         for item in items_list:
-                            if (items_list[item_count]['name'] == firewallName + translatedSource):
+                            if (items_list[item_count]['name'] == firewallName + "-" + translatedSource):
                                 print(item)
                                 print("-------------------")
                                 translatedSourceUUID = items_list[item_count]['id']
@@ -1488,7 +1488,7 @@ def create_nat():
                         items_list = response_json["items"]
                         item_count = 0
                         for item in items_list:
-                            if (items_list[item_count]['name'] == firewallName + translatedDestination):
+                            if (items_list[item_count]['name'] == firewallName + "-" + translatedDestination):
                                 print(item)
                                 print("-------------------")
                                 translatedDestinationUUID = items_list[item_count]['id']
