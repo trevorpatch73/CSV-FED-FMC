@@ -792,7 +792,7 @@ def create_nat():
 
             jsonData = json.dumps(dataDict)
 
-            url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/policy/ftdnatpolicies '
+            url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/policy/ftdnatpolicies'
 
             newHeaders = {'Content-type': 'application/json',
                           'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
