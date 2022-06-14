@@ -1048,7 +1048,7 @@ def create_nat():
                     print(
                         f'translatedSourceGroup is mapped too: {translatedSourceGroup}')
 
-                    if translatedSource != "any" or translatedSource != "ignore":
+                    if translatedSource != "any" and translatedSource != "ignore":
 
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedSource}'
 
@@ -1106,7 +1106,7 @@ def create_nat():
                     print(
                         f'translatedDestinationGroup is mapped too: {translatedDestinationGroup}')
 
-                    if translatedDestination != "any" or translatedDestination != "ignore":
+                    if translatedDestination != "any" and translatedDestination != "ignore":
 
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedDestination}'
 
@@ -1365,7 +1365,7 @@ def create_nat():
                     print(
                         f'translatedSourceGroup is mapped too: {translatedSourceGroup}')
 
-                    if translatedSource != "any" or translatedSource != "ignore":
+                    if translatedSource != "any" and translatedSource != "ignore":
 
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedSource}'
 
@@ -1423,7 +1423,7 @@ def create_nat():
                     print(
                         f'translatedDestinationGroup is mapped too: {translatedDestinationGroup}')
 
-                    if translatedDestination != "any" or translatedDestination != "ignore":
+                    if translatedDestination != "any" and translatedDestination != "ignore":
 
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedDestination}'
 
