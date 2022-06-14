@@ -827,6 +827,7 @@ while True:
         print('3. Create Network Objects')
         print('4. Create Port Objects')
         print('5. Create Security Policy for firewall pair')
+        print('6. Create NAT Policy for firewall pair')
 
         selection = input("Please select a menu number: ")
 
@@ -846,6 +847,9 @@ while True:
             create_port_objects()
 
         elif selection == "5":
+            create_security_rules()
+
+        elif selection == "6":
             create_security_rules()
 
         else:
