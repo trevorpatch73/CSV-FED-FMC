@@ -162,9 +162,9 @@ def create_network_objects():
                 firewallName = row['firewallName']
                 print(f'firewallName is mapped too: {firewallName}')
 
-                if not os.path.exists('json_files/' + firewallName + "-" + objectGroup + "_objectgroup.json"):
+                if not os.path.exists('json_files/' + objectGroup + "_objectgroup.json"):
 
-                    filename = firewallName + "-" + objectGroup + "_objectgroup.json"
+                    filename = objectGroup + "_objectgroup.json"
 
                     with open('json_files/' + filename, mode='w') as f:
                         start = {"name": f"{firewallName}" + "-" +
@@ -184,7 +184,7 @@ def create_network_objects():
 
                 else:
 
-                    filename = firewallName + "-" + objectGroup + "_objectgroup.json"
+                    filename = objectGroup + "_objectgroup.json"
 
                     with open('json_files/' + filename, "r") as file:
                         data = json.load(file)
@@ -239,9 +239,9 @@ def create_network_objects():
                 firewallName = row['firewallName']
                 print(f'firewallName is mapped too: {firewallName}')
 
-                if not os.path.exists('json_files/' + firewallName + "-" + objectGroup + "_objectgroup.json"):
+                if not os.path.exists('json_files/' + objectGroup + "_objectgroup.json"):
 
-                    filename = firewallName + "-" + objectGroup + "_objectgroup.json"
+                    filename = objectGroup + "_objectgroup.json"
 
                     with open('json_files/' + filename, mode='w') as f:
                         start = {"name": f"{objectGroup}",
@@ -260,7 +260,7 @@ def create_network_objects():
                             json.dump(data, file)
                 else:
 
-                    filename = firewallName + "-" + objectGroup + "_objectgroup.json"
+                    filename = objectGroup + "_objectgroup.json"
 
                     with open('json_files/' + filename, "r") as file:
                         data = json.load(file)
@@ -290,7 +290,7 @@ def create_network_objects():
             firewallName = row['firewallName']
             print(f'firewallName is mapped too: {firewallName}')
 
-            filename = firewallName + "-" + objectGroup + "_objectgroup.json"
+            filename = objectGroup + "_objectgroup.json"
 
             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?bulk=true'
 
@@ -382,9 +382,9 @@ def create_port_objects():
                         f'Could not locate a protocol port object called, {objectName}')
                 item_count += 1
 
-            if not os.path.exists('json_files/' + firewallName + "-" + objectGroup + "_objectgroup.json"):
+            if not os.path.exists('json_files/' + objectGroup + "_objectgroup.json"):
 
-                filename = firewallName + "-" + objectGroup + "_objectgroup.json"
+                filename = objectGroup + "_objectgroup.json"
 
                 with open('json_files/' + filename, mode='w') as f:
                     start = {"name": f"{objectGroup}",
@@ -403,7 +403,7 @@ def create_port_objects():
 
             else:
 
-                filename = firewallName + "-" + objectGroup + "_objectgroup.json"
+                filename = objectGroup + "_objectgroup.json"
 
                 with open('json_files/' + filename, "r") as file:
                     data = json.load(file)
@@ -428,7 +428,7 @@ def create_port_objects():
             firewallName = row['firewallName']
             print(f'firewallName is mapped too: {firewallName}')
 
-            filename = firewallName + "-" + objectGroup + "_objectgroup.json"
+            filename = objectGroup + "_objectgroup.json"
 
             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/portobjectgroups?bulk=true'
 
@@ -513,7 +513,7 @@ def create_security_rules():
             action = row['action']
             print(f'action is mapped too: {action}')
 
-            filename = firewallName + "-" + ruleName + "_accessrule.json"
+            filename = ruleName + "_accessrule.json"
 
             if not os.path.exists('json_files/' + filename):
 
@@ -758,7 +758,7 @@ def create_security_rules():
 
                 item_count += 1
 
-            filename = firewallName + "-" + ruleName + "_accessrule.json"
+            filename = ruleName + "_accessrule.json"
 
             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/policy/accesspolicies/{containerUUID}/accessrules?category={category}'
 
@@ -954,7 +954,7 @@ def create_nat():
                         items_list = response_json["items"]
                         item_count = 0
                         for item in items_list:
-                            if (items_list[item_count]['name'] == firewallName + "-" + originalSource):
+                            if (items_list[item_count]['name'] == originalSource):
                                 print(item)
                                 print("-------------------")
                                 originalSourceUUID = items_list[item_count]['id']
@@ -1069,7 +1069,7 @@ def create_nat():
                         items_list = response_json["items"]
                         item_count = 0
                         for item in items_list:
-                            if (items_list[item_count]['name'] == firewallName + "-" + originalDestination):
+                            if (items_list[item_count]['name'] == originalDestination):
                                 print(item)
                                 print("-------------------")
                                 originalDestinationUUID = items_list[item_count]['id']
@@ -1188,7 +1188,7 @@ def create_nat():
                             items_list = response_json["items"]
                             item_count = 0
                             for item in items_list:
-                                if (items_list[item_count]['name'] == firewallName + translatedSource):
+                                if (items_list[item_count]['name'] == translatedSource):
                                     print(item)
                                     print("-------------------")
                                     translatedSourceUUID = items_list[item_count]['id']
@@ -1302,7 +1302,7 @@ def create_nat():
                             items_list = response_json["items"]
                             item_count = 0
                             for item in items_list:
-                                if (items_list[item_count]['name'] == firewallName + translatedDestination):
+                                if (items_list[item_count]['name'] == translatedDestination):
                                     print(item)
                                     print("-------------------")
                                     translatedDestinationUUID = items_list[item_count]['id']
@@ -1543,7 +1543,7 @@ def create_nat():
                     items_list = response_json["items"]
                     item_count = 0
                     for item in items_list:
-                        if (items_list[item_count]['name'] == firewallName + "-" + originalSource):
+                        if (items_list[item_count]['name'] == originalSource):
                             print(item)
                             print("-------------------")
                             originalSourceUUID = items_list[item_count]['id']
@@ -1647,7 +1647,7 @@ def create_nat():
                     items_list = response_json["items"]
                     item_count = 0
                     for item in items_list:
-                        if (items_list[item_count]['name'] == firewallName + "-" + originalDestination):
+                        if (items_list[item_count]['name'] == originalDestination):
                             print(item)
                             print("-------------------")
                             originalDestinationUUID = items_list[item_count]['id']
@@ -1759,7 +1759,7 @@ def create_nat():
                         items_list = response_json["items"]
                         item_count = 0
                         for item in items_list:
-                            if (items_list[item_count]['name'] == firewallName + translatedSource):
+                            if (items_list[item_count]['name'] == translatedSource):
                                 print(item)
                                 print("-------------------")
                                 translatedSourceUUID = items_list[item_count]['id']
@@ -1876,7 +1876,7 @@ def create_nat():
                         items_list = response_json["items"]
                         item_count = 0
                         for item in items_list:
-                            if (items_list[item_count]['name'] == firewallName + translatedDestination):
+                            if (items_list[item_count]['name'] == translatedDestination):
                                 print(item)
                                 print("-------------------")
                                 translatedDestinationUUID = items_list[item_count]['id']
