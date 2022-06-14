@@ -876,7 +876,7 @@ def create_nat():
                         entry = {"id": f"{srcZoneUUID}",
                                  "type": "SecurityZone"}
                         print(entry)
-                        temp.append(entry)
+                        temp.update(entry)
 
                         with open('json_files/' + filename, "w") as file:
                             json.dump(data, file)
@@ -918,6 +918,62 @@ def create_nat():
                         temp = data["destinationInterface"]
                         entry = {"id": f"{destZoneUUID}",
                                  "type": "SecurityZone"}
+                        print(entry)
+                        temp.update(entry)
+
+                        with open('json_files/' + filename, "w") as file:
+                            json.dump(data, file)
+
+                with open('json_files/' + filename, "r") as file:
+
+                    originalSource = row['originalSource']
+                    print(f'originalSource is mapped too: {originalSource}')
+
+                    originalSourceGroup = row['originalSourceGroup']
+                    print(
+                        f'originalSourceGroup is mapped too: {originalSourceGroup}')
+
+                    if originalSource != "any":
+
+                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{srcNetGrp}'
+
+                        newHeaders = {'Content-type': 'application/json',
+                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                        response = requests.get(
+                            url, headers=newHeaders, verify=False)
+
+                        print(response.request.url)
+                        print(response.request.headers)
+                        print(response.status_code)
+                        print(response.content)
+
+                        response_json = response.json()
+
+                        originalSourceUUID = response_json['items'][0]['id']
+                        print(f'originalSource UUID is {originalSourceUUID}')
+
+                        data = json.load(file)
+                        temp = data["sourceNetworks"]["objects"]
+
+                        if "TRUE" in originalSourceGroup:
+                            entry = {"type": "NetworkGroup",
+                                     "id": f"{originalSourceUUID}"}
+                        elif "FALSE" in originalSourceGroup:
+                            entry = {"type": "Network",
+                                     "id": f"{originalSourceUUID}"}
+                        else:
+                            print(
+                                "error in type combination idenfitication. please check csv file.")
+                            print(
+                                f"originalSourceGroup is {originalSourceGroup}")
+                            print("valid case-sensitive entries are:")
+                            print("TRUE")
+                            print("FALSE")
+                            print("-------------------")
+                            print("exiting...")
+                            exit()
+
                         print(entry)
                         temp.update(entry)
 
