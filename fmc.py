@@ -933,52 +933,50 @@ def create_nat():
                     print(
                         f'originalSourceGroup is mapped too: {originalSourceGroup}')
 
-                    if originalSource != "any":
+                    url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalSource}'
 
-                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalSource}'
+                    newHeaders = {'Content-type': 'application/json',
+                                  'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
 
-                        newHeaders = {'Content-type': 'application/json',
-                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+                    response = requests.get(
+                        url, headers=newHeaders, verify=False)
 
-                        response = requests.get(
-                            url, headers=newHeaders, verify=False)
+                    print(response.request.url)
+                    print(response.request.headers)
+                    print(response.status_code)
+                    print(response.content)
 
-                        print(response.request.url)
-                        print(response.request.headers)
-                        print(response.status_code)
-                        print(response.content)
+                    response_json = response.json()
 
-                        response_json = response.json()
+                    originalSourceUUID = response_json['items'][0]['id']
+                    print(f'originalSource UUID is {originalSourceUUID}')
 
-                        originalSourceUUID = response_json['items'][0]['id']
-                        print(f'originalSource UUID is {originalSourceUUID}')
+                    data = json.load(file)
+                    temp = data["originalSource"]
 
-                        data = json.load(file)
-                        temp = data["originalSource"]
+                    if "TRUE" in originalSourceGroup:
+                        entry = {"type": "NetworkGroup",
+                                 "id": f"{originalSourceUUID}"}
+                    elif "FALSE" in originalSourceGroup:
+                        entry = {"type": "Network",
+                                 "id": f"{originalSourceUUID}"}
+                    else:
+                        print(
+                            "error in type combination idenfitication. please check csv file.")
+                        print(
+                            f"originalSourceGroup is {originalSourceGroup}")
+                        print("valid case-sensitive entries are:")
+                        print("TRUE")
+                        print("FALSE")
+                        print("-------------------")
+                        print("exiting...")
+                        exit()
 
-                        if "TRUE" in originalSourceGroup:
-                            entry = {"type": "NetworkGroup",
-                                     "id": f"{originalSourceUUID}"}
-                        elif "FALSE" in originalSourceGroup:
-                            entry = {"type": "Network",
-                                     "id": f"{originalSourceUUID}"}
-                        else:
-                            print(
-                                "error in type combination idenfitication. please check csv file.")
-                            print(
-                                f"originalSourceGroup is {originalSourceGroup}")
-                            print("valid case-sensitive entries are:")
-                            print("TRUE")
-                            print("FALSE")
-                            print("-------------------")
-                            print("exiting...")
-                            exit()
+                    print(entry)
+                    temp.update(entry)
 
-                        print(entry)
-                        temp.update(entry)
-
-                        with open('json_files/' + filename, "w") as file:
-                            json.dump(data, file)
+                    with open('json_files/' + filename, "w") as file:
+                        json.dump(data, file)
 
                 with open('json_files/' + filename, "r") as file:
 
@@ -990,53 +988,51 @@ def create_nat():
                     print(
                         f'originalDestinationGroup is mapped too: {originalDestinationGroup}')
 
-                    if originalDestination != "any":
+                    url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalDestination}'
 
-                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalDestination}'
+                    newHeaders = {'Content-type': 'application/json',
+                                  'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
 
-                        newHeaders = {'Content-type': 'application/json',
-                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+                    response = requests.get(
+                        url, headers=newHeaders, verify=False)
 
-                        response = requests.get(
-                            url, headers=newHeaders, verify=False)
+                    print(response.request.url)
+                    print(response.request.headers)
+                    print(response.status_code)
+                    print(response.content)
 
-                        print(response.request.url)
-                        print(response.request.headers)
-                        print(response.status_code)
-                        print(response.content)
+                    response_json = response.json()
 
-                        response_json = response.json()
+                    originalDestinationUUID = response_json['items'][0]['id']
+                    print(
+                        f'originalDestination UUID is {originalDestinationUUID}')
 
-                        originalDestinationUUID = response_json['items'][0]['id']
+                    data = json.load(file)
+                    temp = data["originalDestination"]
+
+                    if "TRUE" in originalDestinationGroup:
+                        entry = {"type": "NetworkGroup",
+                                 "id": f"{originalDestinationUUID}"}
+                    elif "FALSE" in originalDestinationGroup:
+                        entry = {"type": "Network",
+                                 "id": f"{originalDestinationUUID}"}
+                    else:
                         print(
-                            f'originalDestination UUID is {originalDestinationUUID}')
+                            "error in type combination idenfitication. please check csv file.")
+                        print(
+                            f"originalDestinationGroup is {originalDestinationGroup}")
+                        print("valid case-sensitive entries are:")
+                        print("TRUE")
+                        print("FALSE")
+                        print("-------------------")
+                        print("exiting...")
+                        exit()
 
-                        data = json.load(file)
-                        temp = data["originalDestination"]
+                    print(entry)
+                    temp.update(entry)
 
-                        if "TRUE" in originalDestinationGroup:
-                            entry = {"type": "NetworkGroup",
-                                     "id": f"{originalDestinationUUID}"}
-                        elif "FALSE" in originalDestinationGroup:
-                            entry = {"type": "Network",
-                                     "id": f"{originalDestinationUUID}"}
-                        else:
-                            print(
-                                "error in type combination idenfitication. please check csv file.")
-                            print(
-                                f"originalDestinationGroup is {originalDestinationGroup}")
-                            print("valid case-sensitive entries are:")
-                            print("TRUE")
-                            print("FALSE")
-                            print("-------------------")
-                            print("exiting...")
-                            exit()
-
-                        print(entry)
-                        temp.update(entry)
-
-                        with open('json_files/' + filename, "w") as file:
-                            json.dump(data, file)
+                    with open('json_files/' + filename, "w") as file:
+                        json.dump(data, file)
 
                 with open('json_files/' + filename, "r") as file:
 
@@ -1250,52 +1246,50 @@ def create_nat():
                     print(
                         f'originalSourceGroup is mapped too: {originalSourceGroup}')
 
-                    if originalSource != "any":
+                    url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalSource}'
 
-                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalSource}'
+                    newHeaders = {'Content-type': 'application/json',
+                                  'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
 
-                        newHeaders = {'Content-type': 'application/json',
-                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+                    response = requests.get(
+                        url, headers=newHeaders, verify=False)
 
-                        response = requests.get(
-                            url, headers=newHeaders, verify=False)
+                    print(response.request.url)
+                    print(response.request.headers)
+                    print(response.status_code)
+                    print(response.content)
 
-                        print(response.request.url)
-                        print(response.request.headers)
-                        print(response.status_code)
-                        print(response.content)
+                    response_json = response.json()
 
-                        response_json = response.json()
+                    originalSourceUUID = response_json['items'][0]['id']
+                    print(f'originalSource UUID is {originalSourceUUID}')
 
-                        originalSourceUUID = response_json['items'][0]['id']
-                        print(f'originalSource UUID is {originalSourceUUID}')
+                    data = json.load(file)
+                    temp = data["originalSource"]
 
-                        data = json.load(file)
-                        temp = data["originalSource"]
+                    if "TRUE" in originalSourceGroup:
+                        entry = {"type": "NetworkGroup",
+                                 "id": f"{originalSourceUUID}"}
+                    elif "FALSE" in originalSourceGroup:
+                        entry = {"type": "Network",
+                                 "id": f"{originalSourceUUID}"}
+                    else:
+                        print(
+                            "error in type combination idenfitication. please check csv file.")
+                        print(
+                            f"originalSourceGroup is {originalSourceGroup}")
+                        print("valid case-sensitive entries are:")
+                        print("TRUE")
+                        print("FALSE")
+                        print("-------------------")
+                        print("exiting...")
+                        exit()
 
-                        if "TRUE" in originalSourceGroup:
-                            entry = {"type": "NetworkGroup",
-                                     "id": f"{originalSourceUUID}"}
-                        elif "FALSE" in originalSourceGroup:
-                            entry = {"type": "Network",
-                                     "id": f"{originalSourceUUID}"}
-                        else:
-                            print(
-                                "error in type combination idenfitication. please check csv file.")
-                            print(
-                                f"originalSourceGroup is {originalSourceGroup}")
-                            print("valid case-sensitive entries are:")
-                            print("TRUE")
-                            print("FALSE")
-                            print("-------------------")
-                            print("exiting...")
-                            exit()
+                    print(entry)
+                    temp.update(entry)
 
-                        print(entry)
-                        temp.update(entry)
-
-                        with open('json_files/' + filename, "w") as file:
-                            json.dump(data, file)
+                    with open('json_files/' + filename, "w") as file:
+                        json.dump(data, file)
 
                 with open('json_files/' + filename, "r") as file:
 
@@ -1307,53 +1301,51 @@ def create_nat():
                     print(
                         f'originalDestinationGroup is mapped too: {originalDestinationGroup}')
 
-                    if originalDestination != "any":
+                    url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalDestination}'
 
-                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalDestination}'
+                    newHeaders = {'Content-type': 'application/json',
+                                  'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
 
-                        newHeaders = {'Content-type': 'application/json',
-                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+                    response = requests.get(
+                        url, headers=newHeaders, verify=False)
 
-                        response = requests.get(
-                            url, headers=newHeaders, verify=False)
+                    print(response.request.url)
+                    print(response.request.headers)
+                    print(response.status_code)
+                    print(response.content)
 
-                        print(response.request.url)
-                        print(response.request.headers)
-                        print(response.status_code)
-                        print(response.content)
+                    response_json = response.json()
 
-                        response_json = response.json()
+                    originalDestinationUUID = response_json['items'][0]['id']
+                    print(
+                        f'originalDestination UUID is {originalDestinationUUID}')
 
-                        originalDestinationUUID = response_json['items'][0]['id']
+                    data = json.load(file)
+                    temp = data["originalDestination"]
+
+                    if "TRUE" in originalDestinationGroup:
+                        entry = {"type": "NetworkGroup",
+                                 "id": f"{originalDestinationUUID}"}
+                    elif "FALSE" in originalDestinationGroup:
+                        entry = {"type": "Network",
+                                 "id": f"{originalDestinationUUID}"}
+                    else:
                         print(
-                            f'originalDestination UUID is {originalDestinationUUID}')
+                            "error in type combination idenfitication. please check csv file.")
+                        print(
+                            f"originalDestinationGroup is {originalDestinationGroup}")
+                        print("valid case-sensitive entries are:")
+                        print("TRUE")
+                        print("FALSE")
+                        print("-------------------")
+                        print("exiting...")
+                        exit()
 
-                        data = json.load(file)
-                        temp = data["originalDestination"]
+                    print(entry)
+                    temp.update(entry)
 
-                        if "TRUE" in originalDestinationGroup:
-                            entry = {"type": "NetworkGroup",
-                                     "id": f"{originalDestinationUUID}"}
-                        elif "FALSE" in originalDestinationGroup:
-                            entry = {"type": "Network",
-                                     "id": f"{originalDestinationUUID}"}
-                        else:
-                            print(
-                                "error in type combination idenfitication. please check csv file.")
-                            print(
-                                f"originalDestinationGroup is {originalDestinationGroup}")
-                            print("valid case-sensitive entries are:")
-                            print("TRUE")
-                            print("FALSE")
-                            print("-------------------")
-                            print("exiting...")
-                            exit()
-
-                        print(entry)
-                        temp.update(entry)
-
-                        with open('json_files/' + filename, "w") as file:
-                            json.dump(data, file)
+                    with open('json_files/' + filename, "w") as file:
+                        json.dump(data, file)
 
                 with open('json_files/' + filename, "r") as file:
 
@@ -1491,7 +1483,7 @@ def create_nat():
             filename = natPolicy + "-" + natRuleName + "-" + \
                 ruleType + "-" + natType + "_natpolicy.json"
 
-            url = f'https: // {fmc_address}/api/fmc_config/v1/domain/{domainUUID}/policy/ftdnatpolicies'
+            url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/policy/ftdnatpolicies'
 
             newHeaders = {'Content-type': 'application/json',
                           'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
