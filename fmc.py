@@ -781,12 +781,12 @@ def create_nat():
         csv_reader = csv.DictReader(csv_file, delimiter=',')
         line_count = 0
         for row in csv_reader:
-            NatPolicy = row['NatPolicy']
-            print(f'NAT POLICY is mapped too: {NatPolicy}')
+            natPolicy = row['natPolicy']
+            print(f'NAT POLICY is mapped too: {natPolicy}')
 
             dataDict = {
                 "type": "FTDNatPolicy",
-                "name": NatPolicy,
+                "name": natPolicy,
                 "description": "NAT POLICY CREATED BY PRESIDIO GOVERNMENT SOLUTIONS"
             }
 

@@ -1,2 +1,2 @@
-NatPolicy
-Trevor_Test
+natPolicy,natRuleName,ruleType,natType,sourceZone,destinationZone,originalSource,originalDestination,translatedSource,translatedDestination
+Site1-natPolicy,LEG-DNS-TRANSLATION,manual,static,,,,,,
