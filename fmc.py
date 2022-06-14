@@ -822,8 +822,20 @@ def create_nat():
             if not os.path.exists('json_files/' + filename):
 
                 with open('json_files/' + filename, mode='w') as f:
-                    start = {"interfaceInOriginalDestination": False, "type": "FTDManualNatRule", "enabled": True, "interfaceIpv6": False, "fallThrough": False,
-                             "dns": False, "routeLookup": False, "noProxyArp": False, "netToNet": False, "description": f"{natRuleName} migrated by PRESIDIO GOVERNMENT SOLUTIONS"}
+                    if "manual" in ruleType and "static" in natType:
+                        start = {"sourceInterface": {}, "destinationInterface": {}, "originalSource": {}, "originalDestination": {}, "originalSourcePort": {}, "originalDestinationPort": {}, "translatedSource": {}, "translatedDestination": {}, "translatedSourcePort": {}, "translatedDestinationPort": {}, "unidirectional": False,
+                                 "interfaceInOriginalDestination": False, "type": "FTDManualNatRule", "enabled": True, "natType": "STATIC", "interfaceIpv6": False, "fallThrough": False, "dns": False, "routeLookup": False, "noProxyArp": False, "netToNet": False, "description": f"{natRuleName} migrated by PRESIDIO NETWORK SOLUTIONS"}
+                    else:
+                        print(
+                            "error in type combination idenfitication. please check csv file.")
+                        print(f"natType is {natType}")
+                        print(f"ruleType is {ruleType}")
+                        print("valid combinations:")
+                        print("manual + static")
+                        print("-------------------")
+                        print("exiting...")
+                        exit()
+
                     json.dump(start, f)
                     sleep(1)
 
@@ -860,9 +872,9 @@ def create_nat():
                             item_count += 1
 
                         data = json.load(file)
-                        temp = data
-                        entry = {"sourceInterface": {
-                            "id": f"{srcZoneUUID}", "type": "SecurityZone"}}
+                        temp = data["sourceInterface"]
+                        entry = {"id": f"{srcZoneUUID}",
+                                 "type": "SecurityZone"}
                         print(entry)
                         temp.append(entry)
 
@@ -903,9 +915,8 @@ def create_nat():
                             item_count += 1
 
                         data = json.load(file)
-                        temp = data
-                        entry = {"destinationInterface": {
-                            "id": f"{destZoneUUID}", "type": "SecurityZone"}}
+                        temp = data["destinationInterface"]
+                        entry = {"id": f"{destZoneUUID}", "type": "SecurityZone"}
                         print(entry)
                         temp.append(entry)
 
