@@ -935,7 +935,7 @@ def create_nat():
 
                     if originalSource != "any":
 
-                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{srcNetGrp}'
+                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalSource}'
 
                         newHeaders = {'Content-type': 'application/json',
                                       'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
