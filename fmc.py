@@ -805,6 +805,7 @@ def create_nat():
             print(response.request.body)
             print(response.status_code)
             print(response.headers)
+            print(response.content)
 
 
 while True:
