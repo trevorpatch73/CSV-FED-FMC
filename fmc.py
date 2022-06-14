@@ -823,7 +823,7 @@ def create_nat():
 
                 with open('json_files/' + filename, mode='w') as f:
                     if "manual" in ruleType and "static" in natType:
-                        start = {"sourceInterface": {}, "destinationInterface": {}, "originalSource": {}, "originalDestination": {}, "originalSourcePort": {}, "originalDestinationPort": {}, "translatedSource": {}, "translatedDestination": {}, "translatedSourcePort": {}, "translatedDestinationPort": {}, "unidirectional": False,
+                        start = {"sourceInterface": {}, "destinationInterface": {}, "originalSource": {}, "originalDestination": {}, "translatedSource": {}, "translatedDestination": {}, "unidirectional": False,
                                  "interfaceInOriginalDestination": False, "type": "FTDManualNatRule", "enabled": True, "natType": "STATIC", "interfaceIpv6": False, "fallThrough": False, "dns": False, "routeLookup": False, "noProxyArp": False, "netToNet": False, "description": f"{natRuleName} migrated by PRESIDIO NETWORK SOLUTIONS"}
                     else:
                         print(
