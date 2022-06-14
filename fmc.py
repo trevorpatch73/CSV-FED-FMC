@@ -954,7 +954,7 @@ def create_nat():
                         print(f'originalSource UUID is {originalSourceUUID}')
 
                         data = json.load(file)
-                        temp = data["sourceNetworks"]["objects"]
+                        temp = data["originalSource"]
 
                         if "TRUE" in originalSourceGroup:
                             entry = {"type": "NetworkGroup",
