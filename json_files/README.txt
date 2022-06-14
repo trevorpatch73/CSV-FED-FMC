@@ -1,0 +1,1 @@
+This directory is for the dynamic creation of JSON Object Files for pushing into the FMC. All files ending in .json within here should be within gitignore.
