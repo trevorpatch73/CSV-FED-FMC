@@ -980,6 +980,180 @@ def create_nat():
                         with open('json_files/' + filename, "w") as file:
                             json.dump(data, file)
 
+                with open('json_files/' + filename, "r") as file:
+
+                    originalDestination = row['originalDestination']
+                    print(
+                        f'originalDestination is mapped too: {originalDestination}')
+
+                    originalDestinationGroup = row['originalDestinationGroup']
+                    print(
+                        f'originalDestinationGroup is mapped too: {originalDestinationGroup}')
+
+                    if originalDestination != "any":
+
+                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalDestination}'
+
+                        newHeaders = {'Content-type': 'application/json',
+                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                        response = requests.get(
+                            url, headers=newHeaders, verify=False)
+
+                        print(response.request.url)
+                        print(response.request.headers)
+                        print(response.status_code)
+                        print(response.content)
+
+                        response_json = response.json()
+
+                        originalDestinationUUID = response_json['items'][0]['id']
+                        print(
+                            f'originalDestination UUID is {originalDestinationUUID}')
+
+                        data = json.load(file)
+                        temp = data["originalDestination"]
+
+                        if "TRUE" in originalDestinationGroup:
+                            entry = {"type": "NetworkGroup",
+                                     "id": f"{originalDestinationUUID}"}
+                        elif "FALSE" in originalDestinationGroup:
+                            entry = {"type": "Network",
+                                     "id": f"{originalDestinationUUID}"}
+                        else:
+                            print(
+                                "error in type combination idenfitication. please check csv file.")
+                            print(
+                                f"originalDestinationGroup is {originalDestinationGroup}")
+                            print("valid case-sensitive entries are:")
+                            print("TRUE")
+                            print("FALSE")
+                            print("-------------------")
+                            print("exiting...")
+                            exit()
+
+                        print(entry)
+                        temp.update(entry)
+
+                        with open('json_files/' + filename, "w") as file:
+                            json.dump(data, file)
+
+                with open('json_files/' + filename, "r") as file:
+
+                    translatedSource = row['translatedSource']
+                    print(
+                        f'translatedSource is mapped too: {translatedSource}')
+
+                    translatedSourceGroup = row['translatedSourceGroup']
+                    print(
+                        f'translatedSourceGroup is mapped too: {translatedSourceGroup}')
+
+                    if translatedSource != "any":
+
+                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedSource}'
+
+                        newHeaders = {'Content-type': 'application/json',
+                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                        response = requests.get(
+                            url, headers=newHeaders, verify=False)
+
+                        print(response.request.url)
+                        print(response.request.headers)
+                        print(response.status_code)
+                        print(response.content)
+
+                        response_json = response.json()
+
+                        translatedSourceUUID = response_json['items'][0]['id']
+                        print(
+                            f'translatedSource UUID is {translatedSourceUUID}')
+
+                        data = json.load(file)
+                        temp = data["translatedSource"]
+
+                        if "TRUE" in translatedSourceGroup:
+                            entry = {"type": "NetworkGroup",
+                                     "id": f"{translatedSourceUUID}"}
+                        elif "FALSE" in translatedSourceGroup:
+                            entry = {"type": "Network",
+                                     "id": f"{translatedSourceUUID}"}
+                        else:
+                            print(
+                                "error in type combination idenfitication. please check csv file.")
+                            print(
+                                f"translatedSourceGroup is {translatedSourceGroup}")
+                            print("valid case-sensitive entries are:")
+                            print("TRUE")
+                            print("FALSE")
+                            print("-------------------")
+                            print("exiting...")
+                            exit()
+
+                        print(entry)
+                        temp.update(entry)
+
+                        with open('json_files/' + filename, "w") as file:
+                            json.dump(data, file)
+
+                with open('json_files/' + filename, "r") as file:
+
+                    translatedDestination = row['translatedDestination']
+                    print(
+                        f'translatedDestination is mapped too: {translatedDestination}')
+
+                    translatedDestinationGroup = row['translatedDestinationGroup']
+                    print(
+                        f'translatedDestinationGroup is mapped too: {translatedDestinationGroup}')
+
+                    if translatedDestination != "any":
+
+                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedDestination}'
+
+                        newHeaders = {'Content-type': 'application/json',
+                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                        response = requests.get(
+                            url, headers=newHeaders, verify=False)
+
+                        print(response.request.url)
+                        print(response.request.headers)
+                        print(response.status_code)
+                        print(response.content)
+
+                        response_json = response.json()
+
+                        translatedDestinationUUID = response_json['items'][0]['id']
+                        print(
+                            f'translatedDestination UUID is {translatedDestinationUUID}')
+
+                        data = json.load(file)
+                        temp = data["translatedDestination"]
+
+                        if "TRUE" in translatedDestinationGroup:
+                            entry = {"type": "NetworkGroup",
+                                     "id": f"{translatedDestinationUUID}"}
+                        elif "FALSE" in translatedDestinationGroup:
+                            entry = {"type": "Network",
+                                     "id": f"{translatedDestinationUUID}"}
+                        else:
+                            print(
+                                "error in type combination idenfitication. please check csv file.")
+                            print(
+                                f"translatedDestinationGroup is {translatedDestinationGroup}")
+                            print("valid case-sensitive entries are:")
+                            print("TRUE")
+                            print("FALSE")
+                            print("-------------------")
+                            print("exiting...")
+                            exit()
+
+                        print(entry)
+                        temp.update(entry)
+
+                        with open('json_files/' + filename, "w") as file:
+                            json.dump(data, file)
+
 
 while True:
     print('Author: Trevor Patch')

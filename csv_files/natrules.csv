@@ -1,5 +1,5 @@
-natPolicy,natRuleName,ruleType,natType,sourceZone,destinationZone,originalSource,originalSourceGroup,originalDestination,originalDestinationGroup,translatedSource,translatedSourceGroup,translatedDestination,translatedDestinationGroup,originalSourcePort,originalDestinationPort,translatedSourcePort,translatedDestinationPort
-Site1-natPolicy,TRANS-DEST-IP_2-2-2-2_TO_8-8-8-8,manual,static,any,Site1-Outside,Site1-SuperNet,TRUE,HOST-2-2-2-2,FALSE,ignore,FALSE,HOST-8-8-8-8,FALSE,ignore,ignore,ignore,ignore
-Site1-natPolicy,TRANS-DEST-IP_4-4-4-4_TO_8-8-8-8,manual,static,any,Site1-Outside,any,FALSE,HOST-4-4-4-4,FALSE,ignore,FALSE,HOST-8-8-8-8,FALSE,ignore,ignore,ignore,ignore
-Site2-natPolicy,TRANS-DEST-IP_2-2-2-2_TO_8-8-8-8,manual,static,any,Site1-Outside,Site2-SuperNet,TRUE,HOST-2-2-2-2,FALSE,ignore,FALSE,HOST-8-8-8-8,FALSE,ignore,ignore,ignore,ignore
-Site2-natPolicy,TRANS-DEST-IP_4-4-4-4_TO_8-8-8-8,manual,static,any,Site1-Outside,any,FALSE,HOST-4-4-4-4,FALSE,ignore,FALSE,HOST-8-8-8-8,FALSE,ignore,ignore,ignore,ignore
+natPolicy,natRuleName,ruleType,natType,sourceZone,destinationZone,originalSource,originalSourceGroup,originalDestination,originalDestinationGroup,translatedSource,translatedSourceGroup,translatedDestination,translatedDestinationGroup
+Site1-natPolicy,TRANS-DEST-IP_2-2-2-2_TO_8-8-8-8,manual,static,any,Site1-Outside,Site1-SuperNet,TRUE,HOST-2-2-2-2,FALSE,ignore,FALSE,HOST-8-8-8-8,FALSE
+Site1-natPolicy,TRANS-DEST-IP_4-4-4-4_TO_8-8-8-8,manual,static,any,Site1-Outside,any,FALSE,HOST-4-4-4-4,FALSE,ignore,FALSE,HOST-8-8-8-8,FALSE
+Site2-natPolicy,TRANS-DEST-IP_2-2-2-2_TO_8-8-8-8,manual,static,any,Site1-Outside,Site2-SuperNet,TRUE,HOST-2-2-2-2,FALSE,ignore,FALSE,HOST-8-8-8-8,FALSE
+Site2-natPolicy,TRANS-DEST-IP_4-4-4-4_TO_8-8-8-8,manual,static,any,Site1-Outside,any,FALSE,HOST-4-4-4-4,FALSE,ignore,FALSE,HOST-8-8-8-8,FALSE
