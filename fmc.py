@@ -850,7 +850,7 @@ while True:
             create_security_rules()
 
         elif selection == "6":
-            create_security_rules()
+            create_nat()
 
         else:
             print('Invalid Menu Selection. Please input the menu number only.')
