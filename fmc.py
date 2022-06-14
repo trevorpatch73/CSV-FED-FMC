@@ -936,7 +936,7 @@ def create_nat():
                     print(
                         f'originalSourceGroup is mapped too: {originalSourceGroup}')
 
-                    if "TRUE" in originalSourceGroup:
+                    if "yes" in originalSourceGroup:
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalSource}'
 
                         newHeaders = {'Content-type': 'application/json',
@@ -963,7 +963,7 @@ def create_nat():
 
                             item_count += 1
 
-                    elif "FALSE" in originalSourceGroup:
+                    elif "no" in originalSourceGroup:
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{originalSource}'
 
                         newHeaders = {'Content-type': 'application/json',
@@ -1017,10 +1017,10 @@ def create_nat():
                     data = json.load(file)
                     temp = data["originalSource"]
 
-                    if "TRUE" in originalSourceGroup:
+                    if "yes" in originalSourceGroup:
                         entry = {"type": "NetworkGroup",
                                  "id": f"{originalSourceUUID}"}
-                    elif "FALSE" in originalSourceGroup:
+                    elif "no" in originalSourceGroup:
                         entry = {"type": "Network",
                                  "id": f"{originalSourceUUID}"}
                     else:
@@ -1051,7 +1051,7 @@ def create_nat():
                     print(
                         f'originalDestinationGroup is mapped too: {originalDestinationGroup}')
 
-                    if "TRUE" in originalDestinationGroup:
+                    if "yes" in originalDestinationGroup:
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalDestination}'
 
                         newHeaders = {'Content-type': 'application/json',
@@ -1078,7 +1078,7 @@ def create_nat():
 
                             item_count += 1
 
-                    elif "FALSE" in originalDestinationGroup:
+                    elif "no" in originalDestinationGroup:
 
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{originalDestination}'
 
@@ -1134,10 +1134,10 @@ def create_nat():
                     data = json.load(file)
                     temp = data["originalDestination"]
 
-                    if "TRUE" in originalDestinationGroup:
+                    if "yes" in originalDestinationGroup:
                         entry = {"type": "NetworkGroup",
                                  "id": f"{originalDestinationUUID}"}
-                    elif "FALSE" in originalDestinationGroup:
+                    elif "no" in originalDestinationGroup:
                         entry = {"type": "Network",
                                  "id": f"{originalDestinationUUID}"}
                     else:
@@ -1170,7 +1170,7 @@ def create_nat():
 
                     if translatedSource != "ignore":
 
-                        if "TRUE" in translatedSourceGroup:
+                        if "yes" in translatedSourceGroup:
                             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedSource}'
 
                             newHeaders = {'Content-type': 'application/json',
@@ -1197,7 +1197,7 @@ def create_nat():
 
                                 item_count += 1
 
-                        elif "FALSE" in translatedSourceGroup:
+                        elif "no" in translatedSourceGroup:
                             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{translatedSource}'
 
                             newHeaders = {'Content-type': 'application/json',
@@ -1248,10 +1248,10 @@ def create_nat():
                         data = json.load(file)
                         temp = data["translatedSource"]
 
-                        if "TRUE" in translatedSourceGroup:
+                        if "yes" in translatedSourceGroup:
                             entry = {"type": "NetworkGroup",
                                      "id": f"{translatedSourceUUID}"}
-                        elif "FALSE" in translatedSourceGroup:
+                        elif "no" in translatedSourceGroup:
                             entry = {"type": "Network",
                                      "id": f"{translatedSourceUUID}"}
                         else:
@@ -1284,7 +1284,7 @@ def create_nat():
 
                     if translatedDestination != "ignore":
 
-                        if "TRUE" in translatedDestinationGroup:
+                        if "yes" in translatedDestinationGroup:
                             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedDestination}'
 
                             newHeaders = {'Content-type': 'application/json',
@@ -1311,7 +1311,7 @@ def create_nat():
 
                                 item_count += 1
 
-                        elif "FALSE" in translatedDestinationGroup:
+                        elif "no" in translatedDestinationGroup:
 
                             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{translatedDestination}'
 
@@ -1367,10 +1367,10 @@ def create_nat():
                         data = json.load(file)
                         temp = data["translatedDestination"]
 
-                        if "TRUE" in translatedDestinationGroup:
+                        if "yes" in translatedDestinationGroup:
                             entry = {"type": "NetworkGroup",
                                      "id": f"{translatedDestinationUUID}"}
-                        elif "FALSE" in translatedDestinationGroup:
+                        elif "no" in translatedDestinationGroup:
                             entry = {"type": "Network",
                                      "id": f"{translatedDestinationUUID}"}
                         else:
@@ -1487,7 +1487,7 @@ def create_nat():
                     print(
                         f'originalSourceGroup is mapped too: {originalSourceGroup}')
 
-                    if "TRUE" in originalSourceGroup:
+                    if "yes" in originalSourceGroup:
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalSource}'
 
                         newHeaders = {'Content-type': 'application/json',
@@ -1501,20 +1501,7 @@ def create_nat():
                         print(response.status_code)
                         print(response.content)
 
-                        response_json = response.json()
-                        items_list = response_json["items"]
-                        item_count = 0
-                        for item in items_list:
-                            if (items_list[item_count]['name'] == firewallName + "-" + originalSource):
-                                print(item)
-                                print("-------------------")
-                                originalSourceUUID = items_list[item_count]['id']
-                                print(
-                                    f'originalSource UUID is {originalSourceUUID}')
-
-                            item_count += 1
-
-                    elif "FALSE" in originalSourceGroup:
+                    elif "no" in originalSourceGroup:
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{originalSource}'
 
                         newHeaders = {'Content-type': 'application/json',
@@ -1547,31 +1534,31 @@ def create_nat():
                             print(response.status_code)
                             print(response.content)
 
-                        response_json = response.json()
-                        items_list = response_json["items"]
-                        item_count = 0
-                        for item in items_list:
-                            if (items_list[item_count]['name'] == originalSource):
-                                print(item)
-                                print("-------------------")
-                                originalSourceUUID = items_list[item_count]['id']
-                                print(
-                                    f'originalSource UUID is {originalSourceUUID}')
-
-                            item_count += 1
-
                     else:
                         print(
                             "error in originalSourceGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
                         print(f"originalSourceGroup is {originalSourceGroup}")
 
+                    response_json = response.json()
+                    items_list = response_json["items"]
+                    item_count = 0
+                    for item in items_list:
+                        if (items_list[item_count]['name'] == firewallName + "-" + originalSource):
+                            print(item)
+                            print("-------------------")
+                            originalSourceUUID = items_list[item_count]['id']
+                            print(
+                                f'originalSource UUID is {originalSourceUUID}')
+
+                        item_count += 1
+
                     data = json.load(file)
                     temp = data["originalSource"]
 
-                    if "TRUE" in originalSourceGroup:
+                    if "yes" in originalSourceGroup:
                         entry = {"type": "NetworkGroup",
                                  "id": f"{originalSourceUUID}"}
-                    elif "FALSE" in originalSourceGroup:
+                    elif "no" in originalSourceGroup:
                         entry = {"type": "Network",
                                  "id": f"{originalSourceUUID}"}
                     else:
@@ -1602,7 +1589,7 @@ def create_nat():
                     print(
                         f'originalDestinationGroup is mapped too: {originalDestinationGroup}')
 
-                    if "TRUE" in originalDestinationGroup:
+                    if "yes" in originalDestinationGroup:
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalDestination}'
 
                         newHeaders = {'Content-type': 'application/json',
@@ -1616,20 +1603,7 @@ def create_nat():
                         print(response.status_code)
                         print(response.content)
 
-                        response_json = response.json()
-                        items_list = response_json["items"]
-                        item_count = 0
-                        for item in items_list:
-                            if (items_list[item_count]['name'] == firewallName + "-" + originalDestination):
-                                print(item)
-                                print("-------------------")
-                                originalDestinationUUID = items_list[item_count]['id']
-                                print(
-                                    f'originalDestination UUID is {originalDestinationUUID}')
-
-                            item_count += 1
-
-                    elif "FALSE" in originalDestinationGroup:
+                    elif "no" in originalDestinationGroup:
 
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{originalDestination}'
 
@@ -1663,32 +1637,32 @@ def create_nat():
                             print(response.status_code)
                             print(response.content)
 
-                        response_json = response.json()
-                        items_list = response_json["items"]
-                        item_count = 0
-                        for item in items_list:
-                            if (items_list[item_count]['name'] == originalDestination):
-                                print(item)
-                                print("-------------------")
-                                originalDestinationUUID = items_list[item_count]['id']
-                                print(
-                                    f'originalDestination UUID is {originalDestinationUUID}')
-
-                            item_count += 1
-
                     else:
                         print(
                             "error in originalDestinationGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
                         print(
                             f"originalDestinationGroup is {originalDestinationGroup}")
 
+                    response_json = response.json()
+                    items_list = response_json["items"]
+                    item_count = 0
+                    for item in items_list:
+                        if (items_list[item_count]['name'] == firewallName + "-" + originalDestination):
+                            print(item)
+                            print("-------------------")
+                            originalDestinationUUID = items_list[item_count]['id']
+                            print(
+                                f'originalDestination UUID is {originalDestinationUUID}')
+
+                        item_count += 1
+
                     data = json.load(file)
                     temp = data["originalDestination"]
 
-                    if "TRUE" in originalDestinationGroup:
+                    if "yes" in originalDestinationGroup:
                         entry = {"type": "NetworkGroup",
                                  "id": f"{originalDestinationUUID}"}
-                    elif "FALSE" in originalDestinationGroup:
+                    elif "no" in originalDestinationGroup:
                         entry = {"type": "Network",
                                  "id": f"{originalDestinationUUID}"}
                     else:
@@ -1721,7 +1695,7 @@ def create_nat():
 
                     if translatedSource != "ignore":
 
-                        if "TRUE" in translatedSourceGroup:
+                        if "yes" in translatedSourceGroup:
                             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedSource}'
 
                             newHeaders = {'Content-type': 'application/json',
@@ -1735,20 +1709,7 @@ def create_nat():
                             print(response.status_code)
                             print(response.content)
 
-                            response_json = response.json()
-                            items_list = response_json["items"]
-                            item_count = 0
-                            for item in items_list:
-                                if (items_list[item_count]['name'] == firewallName + translatedSource):
-                                    print(item)
-                                    print("-------------------")
-                                    translatedSourceUUID = items_list[item_count]['id']
-                                    print(
-                                        f'translatedSourcee UUID is {translatedSourceUUID}')
-
-                                item_count += 1
-
-                        elif "FALSE" in translatedSourceGroup:
+                        elif "no" in translatedSourceGroup:
                             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{translatedSource}'
 
                             newHeaders = {'Content-type': 'application/json',
@@ -1777,32 +1738,43 @@ def create_nat():
                                 print(response.status_code)
                                 print(response.content)
 
-                            response_json = response.json()
-                            items_list = response_json["items"]
-                            item_count = 0
-                            for item in items_list:
-                                if (items_list[item_count]['name'] == translatedSource):
-                                    print(item)
-                                    print("-------------------")
-                                    translatedSourceUUID = items_list[item_count]['id']
-                                    print(
-                                        f'translatedSource UUID is {translatedSourceUUID}')
-
-                                item_count += 1
-
                         else:
                             print(
                                 "error in translatedSourceGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
                             print(
                                 f"translatedSourceGroup is {translatedSourceGroup}")
 
+                        newHeaders = {'Content-type': 'application/json',
+                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                        response = requests.get(
+                            url, headers=newHeaders, verify=False)
+
+                        print(response.request.url)
+                        print(response.request.headers)
+                        print(response.status_code)
+                        print(response.content)
+
+                        response_json = response.json()
+                        items_list = response_json["items"]
+                        item_count = 0
+                        for item in items_list:
+                            if (items_list[item_count]['name'] == firewallName + translatedSource):
+                                print(item)
+                                print("-------------------")
+                                translatedSourceUUID = items_list[item_count]['id']
+                                print(
+                                    f'translatedSourcee UUID is {translatedSourceUUID}')
+
+                            item_count += 1
+
                         data = json.load(file)
                         temp = data["translatedSource"]
 
-                        if "TRUE" in translatedSourceGroup:
+                        if "yes" in translatedSourceGroup:
                             entry = {"type": "NetworkGroup",
                                      "id": f"{translatedSourceUUID}"}
-                        elif "FALSE" in translatedSourceGroup:
+                        elif "no" in translatedSourceGroup:
                             entry = {"type": "Network",
                                      "id": f"{translatedSourceUUID}"}
                         else:
@@ -1835,7 +1807,7 @@ def create_nat():
 
                     if translatedDestination != "ignore":
 
-                        if "TRUE" in translatedDestinationGroup:
+                        if "yes" in translatedDestinationGroup:
                             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedDestination}'
 
                             newHeaders = {'Content-type': 'application/json',
@@ -1849,20 +1821,7 @@ def create_nat():
                             print(response.status_code)
                             print(response.content)
 
-                            response_json = response.json()
-                            items_list = response_json["items"]
-                            item_count = 0
-                            for item in items_list:
-                                if (items_list[item_count]['name'] == firewallName + translatedDestination):
-                                    print(item)
-                                    print("-------------------")
-                                    translatedDestinationUUID = items_list[item_count]['id']
-                                    print(
-                                        f'translatedDestination UUID is {translatedDestinationUUID}')
-
-                                item_count += 1
-
-                        elif "FALSE" in translatedDestinationGroup:
+                        elif "no" in translatedDestinationGroup:
 
                             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{translatedDestination}'
 
@@ -1896,32 +1855,43 @@ def create_nat():
                                 print(response.status_code)
                                 print(response.content)
 
-                                response_json = response.json()
-                                items_list = response_json["items"]
-                                item_count = 0
-                                for item in items_list:
-                                    if (items_list[item_count]['name'] == translatedDestination):
-                                        print(item)
-                                        print("-------------------")
-                                        translatedDestinationUUID = items_list[item_count]['id']
-                                        print(
-                                            f'translatedDestination UUID is {translatedDestinationUUID}')
-
-                                    item_count += 1
-
                         else:
                             print(
                                 "error in originalDestinationGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
                             print(
                                 f"translatedDestinationGroup is {translatedDestinationGroup}")
 
+                        newHeaders = {'Content-type': 'application/json',
+                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                        response = requests.get(
+                            url, headers=newHeaders, verify=False)
+
+                        print(response.request.url)
+                        print(response.request.headers)
+                        print(response.status_code)
+                        print(response.content)
+
+                        response_json = response.json()
+                        items_list = response_json["items"]
+                        item_count = 0
+                        for item in items_list:
+                            if (items_list[item_count]['name'] == firewallName + translatedDestination):
+                                print(item)
+                                print("-------------------")
+                                translatedDestinationUUID = items_list[item_count]['id']
+                                print(
+                                    f'translatedDestination UUID is {translatedDestinationUUID}')
+
+                            item_count += 1
+
                         data = json.load(file)
                         temp = data["translatedDestination"]
 
-                        if "TRUE" in translatedDestinationGroup:
+                        if "yes" in translatedDestinationGroup:
                             entry = {"type": "NetworkGroup",
                                      "id": f"{translatedDestinationUUID}"}
-                        elif "FALSE" in translatedDestinationGroup:
+                        elif "no" in translatedDestinationGroup:
                             entry = {"type": "Network",
                                      "id": f"{translatedDestinationUUID}"}
                         else:
