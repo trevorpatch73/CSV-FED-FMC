@@ -916,9 +916,10 @@ def create_nat():
 
                         data = json.load(file)
                         temp = data["destinationInterface"]
-                        entry = {"id": f"{destZoneUUID}", "type": "SecurityZone"}
+                        entry = {"id": f"{destZoneUUID}",
+                                 "type": "SecurityZone"}
                         print(entry)
-                        temp.append(entry)
+                        temp.update(entry)
 
                         with open('json_files/' + filename, "w") as file:
                             json.dump(data, file)
