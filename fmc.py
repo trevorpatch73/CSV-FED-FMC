@@ -938,23 +938,55 @@ def create_nat():
 
                     if "TRUE" in originalSourceGroup:
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalSource}'
+
+                        newHeaders = {'Content-type': 'application/json',
+                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                        response = requests.get(
+                            url, headers=newHeaders, verify=False)
+
+                        print(response.request.url)
+                        print(response.request.headers)
+                        print(response.status_code)
+                        print(response.content)
+
                     elif "FALSE" in originalSourceGroup:
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{originalSource}'
+
+                        newHeaders = {'Content-type': 'application/json',
+                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                        response = requests.get(
+                            url, headers=newHeaders, verify=False)
+
+                        print(response.request.url)
+                        print(response.request.headers)
+                        print(response.status_code)
+                        print(response.content)
+
+                        response_json = response.json()
+
+                        count = response_json["paging"]["count"]
+
+                        if count == 0:
+
+                            url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/hosts?filter=nameOrValue%3A{originalSource}'
+
+                            newHeaders = {'Content-type': 'application/json',
+                                          'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                            response = requests.get(
+                                url, headers=newHeaders, verify=False)
+
+                            print(response.request.url)
+                            print(response.request.headers)
+                            print(response.status_code)
+                            print(response.content)
+
                     else:
                         print(
                             "error in originalSourceGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
                         print(f"originalSourceGroup is {originalSourceGroup}")
-
-                    newHeaders = {'Content-type': 'application/json',
-                                  'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
-
-                    response = requests.get(
-                        url, headers=newHeaders, verify=False)
-
-                    print(response.request.url)
-                    print(response.request.headers)
-                    print(response.status_code)
-                    print(response.content)
 
                     response_json = response.json()
                     items_list = response_json["items"]
@@ -1008,24 +1040,57 @@ def create_nat():
 
                     if "TRUE" in originalDestinationGroup:
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalDestination}'
+
+                        newHeaders = {'Content-type': 'application/json',
+                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                        response = requests.get(
+                            url, headers=newHeaders, verify=False)
+
+                        print(response.request.url)
+                        print(response.request.headers)
+                        print(response.status_code)
+                        print(response.content)
+
                     elif "FALSE" in originalDestinationGroup:
+
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{originalDestination}'
+
+                        newHeaders = {'Content-type': 'application/json',
+                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                        response = requests.get(
+                            url, headers=newHeaders, verify=False)
+
+                        print(response.request.url)
+                        print(response.request.headers)
+                        print(response.status_code)
+                        print(response.content)
+
+                        response_json = response.json()
+
+                        count = response_json["paging"]["count"]
+
+                        if count == 0:
+
+                            url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/hosts?filter=nameOrValue%3A{originalDestination}'
+
+                            newHeaders = {'Content-type': 'application/json',
+                                          'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                            response = requests.get(
+                                url, headers=newHeaders, verify=False)
+
+                            print(response.request.url)
+                            print(response.request.headers)
+                            print(response.status_code)
+                            print(response.content)
+
                     else:
                         print(
                             "error in originalDestinationGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
                         print(
                             f"originalDestinationGroup is {originalDestinationGroup}")
-
-                    newHeaders = {'Content-type': 'application/json',
-                                  'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
-
-                    response = requests.get(
-                        url, headers=newHeaders, verify=False)
-
-                    print(response.request.url)
-                    print(response.request.headers)
-                    print(response.status_code)
-                    print(response.content)
 
                     response_json = response.json()
                     items_list = response_json["items"]
@@ -1081,8 +1146,47 @@ def create_nat():
 
                         if "TRUE" in translatedSourceGroup:
                             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedSource}'
+
+                            newHeaders = {'Content-type': 'application/json',
+                                          'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                            response = requests.get(
+                                url, headers=newHeaders, verify=False)
+
+                            print(response.request.url)
+                            print(response.request.headers)
+                            print(response.status_code)
+                            print(response.content)
+
                         elif "FALSE" in translatedSourceGroup:
                             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{translatedSource}'
+
+                            newHeaders = {'Content-type': 'application/json',
+                                          'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                            response = requests.get(
+                                url, headers=newHeaders, verify=False)
+
+                            print(response.request.url)
+                            print(response.request.headers)
+                            print(response.status_code)
+                            print(response.content)
+
+                            if count == 0:
+
+                                url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/hosts?filter=nameOrValue%3A{translatedSource}'
+
+                                newHeaders = {'Content-type': 'application/json',
+                                              'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                                response = requests.get(
+                                    url, headers=newHeaders, verify=False)
+
+                                print(response.request.url)
+                                print(response.request.headers)
+                                print(response.status_code)
+                                print(response.content)
+
                         else:
                             print(
                                 "error in translatedSourceGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
@@ -1154,8 +1258,52 @@ def create_nat():
 
                         if "TRUE" in translatedDestinationGroup:
                             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedDestination}'
+
+                            newHeaders = {'Content-type': 'application/json',
+                                          'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                            response = requests.get(
+                                url, headers=newHeaders, verify=False)
+
+                            print(response.request.url)
+                            print(response.request.headers)
+                            print(response.status_code)
+                            print(response.content)
+
                         elif "FALSE" in translatedDestinationGroup:
+
                             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{translatedDestination}'
+
+                            newHeaders = {'Content-type': 'application/json',
+                                          'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                            response = requests.get(
+                                url, headers=newHeaders, verify=False)
+
+                            print(response.request.url)
+                            print(response.request.headers)
+                            print(response.status_code)
+                            print(response.content)
+
+                            response_json = response.json()
+
+                            count = response_json["paging"]["count"]
+
+                            if count == 0:
+
+                                url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/hosts?filter=nameOrValue%3A{translatedDestination}'
+
+                                newHeaders = {'Content-type': 'application/json',
+                                              'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                                response = requests.get(
+                                    url, headers=newHeaders, verify=False)
+
+                                print(response.request.url)
+                                print(response.request.headers)
+                                print(response.status_code)
+                                print(response.content)
+
                         else:
                             print(
                                 "error in originalDestinationGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
@@ -1311,23 +1459,55 @@ def create_nat():
 
                     if "TRUE" in originalSourceGroup:
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalSource}'
+
+                        newHeaders = {'Content-type': 'application/json',
+                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                        response = requests.get(
+                            url, headers=newHeaders, verify=False)
+
+                        print(response.request.url)
+                        print(response.request.headers)
+                        print(response.status_code)
+                        print(response.content)
+
                     elif "FALSE" in originalSourceGroup:
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{originalSource}'
+
+                        newHeaders = {'Content-type': 'application/json',
+                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                        response = requests.get(
+                            url, headers=newHeaders, verify=False)
+
+                        print(response.request.url)
+                        print(response.request.headers)
+                        print(response.status_code)
+                        print(response.content)
+
+                        response_json = response.json()
+
+                        count = response_json["paging"]["count"]
+
+                        if count == 0:
+
+                            url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/hosts?filter=nameOrValue%3A{originalSource}'
+
+                            newHeaders = {'Content-type': 'application/json',
+                                          'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                            response = requests.get(
+                                url, headers=newHeaders, verify=False)
+
+                            print(response.request.url)
+                            print(response.request.headers)
+                            print(response.status_code)
+                            print(response.content)
+
                     else:
                         print(
                             "error in originalSourceGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
                         print(f"originalSourceGroup is {originalSourceGroup}")
-
-                    newHeaders = {'Content-type': 'application/json',
-                                  'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
-
-                    response = requests.get(
-                        url, headers=newHeaders, verify=False)
-
-                    print(response.request.url)
-                    print(response.request.headers)
-                    print(response.status_code)
-                    print(response.content)
 
                     response_json = response.json()
                     items_list = response_json["items"]
@@ -1381,24 +1561,57 @@ def create_nat():
 
                     if "TRUE" in originalDestinationGroup:
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{originalDestination}'
+
+                        newHeaders = {'Content-type': 'application/json',
+                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                        response = requests.get(
+                            url, headers=newHeaders, verify=False)
+
+                        print(response.request.url)
+                        print(response.request.headers)
+                        print(response.status_code)
+                        print(response.content)
+
                     elif "FALSE" in originalDestinationGroup:
+
                         url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{originalDestination}'
+
+                        newHeaders = {'Content-type': 'application/json',
+                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                        response = requests.get(
+                            url, headers=newHeaders, verify=False)
+
+                        print(response.request.url)
+                        print(response.request.headers)
+                        print(response.status_code)
+                        print(response.content)
+
+                        response_json = response.json()
+
+                        count = response_json["paging"]["count"]
+
+                        if count == 0:
+
+                            url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/hosts?filter=nameOrValue%3A{originalDestination}'
+
+                            newHeaders = {'Content-type': 'application/json',
+                                          'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                            response = requests.get(
+                                url, headers=newHeaders, verify=False)
+
+                            print(response.request.url)
+                            print(response.request.headers)
+                            print(response.status_code)
+                            print(response.content)
+
                     else:
                         print(
                             "error in originalDestinationGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
                         print(
                             f"originalDestinationGroup is {originalDestinationGroup}")
-
-                    newHeaders = {'Content-type': 'application/json',
-                                  'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
-
-                    response = requests.get(
-                        url, headers=newHeaders, verify=False)
-
-                    print(response.request.url)
-                    print(response.request.headers)
-                    print(response.status_code)
-                    print(response.content)
 
                     response_json = response.json()
                     items_list = response_json["items"]
@@ -1454,8 +1667,47 @@ def create_nat():
 
                         if "TRUE" in translatedSourceGroup:
                             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedSource}'
+
+                            newHeaders = {'Content-type': 'application/json',
+                                          'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                            response = requests.get(
+                                url, headers=newHeaders, verify=False)
+
+                            print(response.request.url)
+                            print(response.request.headers)
+                            print(response.status_code)
+                            print(response.content)
+
                         elif "FALSE" in translatedSourceGroup:
                             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{translatedSource}'
+
+                            newHeaders = {'Content-type': 'application/json',
+                                          'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                            response = requests.get(
+                                url, headers=newHeaders, verify=False)
+
+                            print(response.request.url)
+                            print(response.request.headers)
+                            print(response.status_code)
+                            print(response.content)
+
+                            if count == 0:
+
+                                url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/hosts?filter=nameOrValue%3A{translatedSource}'
+
+                                newHeaders = {'Content-type': 'application/json',
+                                              'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                                response = requests.get(
+                                    url, headers=newHeaders, verify=False)
+
+                                print(response.request.url)
+                                print(response.request.headers)
+                                print(response.status_code)
+                                print(response.content)
+
                         else:
                             print(
                                 "error in translatedSourceGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
@@ -1527,8 +1779,52 @@ def create_nat():
 
                         if "TRUE" in translatedDestinationGroup:
                             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networkgroups?filter=nameOrValue%3A{translatedDestination}'
+
+                            newHeaders = {'Content-type': 'application/json',
+                                          'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                            response = requests.get(
+                                url, headers=newHeaders, verify=False)
+
+                            print(response.request.url)
+                            print(response.request.headers)
+                            print(response.status_code)
+                            print(response.content)
+
                         elif "FALSE" in translatedDestinationGroup:
+
                             url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/networks?filter=nameOrValue%3A{translatedDestination}'
+
+                            newHeaders = {'Content-type': 'application/json',
+                                          'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                            response = requests.get(
+                                url, headers=newHeaders, verify=False)
+
+                            print(response.request.url)
+                            print(response.request.headers)
+                            print(response.status_code)
+                            print(response.content)
+
+                            response_json = response.json()
+
+                            count = response_json["paging"]["count"]
+
+                            if count == 0:
+
+                                url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/hosts?filter=nameOrValue%3A{translatedDestination}'
+
+                                newHeaders = {'Content-type': 'application/json',
+                                              'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                                response = requests.get(
+                                    url, headers=newHeaders, verify=False)
+
+                                print(response.request.url)
+                                print(response.request.headers)
+                                print(response.status_code)
+                                print(response.content)
+
                         else:
                             print(
                                 "error in originalDestinationGroup isn't case-sensitive TRUE OR FALSE. please check csv file.")
