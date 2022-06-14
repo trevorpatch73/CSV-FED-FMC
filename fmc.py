@@ -807,6 +807,111 @@ def create_nat():
             print(response.headers)
             print(response.content)
 
+            natRuleName = row['natRuleName']
+            print(f'natRuleName is mapped too: {natRuleName}')
+
+            ruleType = row['ruleType']
+            print(f'ruleType is mapped too: {ruleType}')
+
+            natType = row['natType']
+            print(f'natType is mapped too: {natType}')
+
+            filename = natPolicy + "-" + natRuleName + "-" + \
+                ruleType + "-" + natType + "_natpolicy.json"
+
+            if not os.path.exists('json_files/' + filename):
+
+                with open('json_files/' + filename, mode='w') as f:
+                    start = {"interfaceInOriginalDestination": False, "type": "FTDManualNatRule", "enabled": True, "interfaceIpv6": False, "fallThrough": False,
+                             "dns": False, "routeLookup": False, "noProxyArp": False, "netToNet": False, "description": f"{natRuleName} migrated by PRESIDIO GOVERNMENT SOLUTIONS"}
+                    json.dump(start, f)
+                    sleep(1)
+
+                with open('json_files/' + filename, "r") as file:
+
+                    sourceZone = row['sourceZone']
+                    print(f'sourceZone is mapped too: {sourceZone}')
+
+                    if sourceZone != "any":
+
+                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/securityzones'
+
+                        newHeaders = {'Content-type': 'application/json',
+                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                        response = requests.get(
+                            url, headers=newHeaders, verify=False)
+
+                        print(response.request.url)
+                        print(response.request.headers)
+                        print(response.status_code)
+                        print(response.content)
+
+                        response_json = response.json()
+                        items_list = response_json["items"]
+                        item_count = 0
+                        for item in items_list:
+                            if (items_list[item_count]['name'] == sourceZone):
+                                print(item)
+                                print("-------------------")
+                                srcZoneUUID = items_list[item_count]['id']
+                                print(f'Source Zone UUID is {srcZoneUUID}')
+
+                            item_count += 1
+
+                        data = json.load(file)
+                        temp = data
+                        entry = {"sourceInterface": {
+                            "id": f"{srcZoneUUID}", "type": "SecurityZone"}}
+                        print(entry)
+                        temp.append(entry)
+
+                        with open('json_files/' + filename, "w") as file:
+                            json.dump(data, file)
+
+                with open('json_files/' + filename, "r") as file:
+
+                    destinationZone = row['destinationZone']
+                    print(f'destinationZone is mapped too: {destinationZone}')
+
+                    if destinationZone != "any":
+
+                        url = f'https://{fmc_address}/api/fmc_config/v1/domain/{domainUUID}/object/securityzones'
+
+                        newHeaders = {'Content-type': 'application/json',
+                                      'Accept': 'text/plain', 'X-auth-access-token': XAuthAccessToken}
+
+                        response = requests.get(
+                            url, headers=newHeaders, verify=False)
+
+                        print(response.request.url)
+                        print(response.request.headers)
+                        print(response.status_code)
+                        print(response.content)
+
+                        response_json = response.json()
+                        items_list = response_json["items"]
+                        item_count = 0
+                        for item in items_list:
+                            if (items_list[item_count]['name'] == destinationZone):
+                                print(item)
+                                print("-------------------")
+                                destZoneUUID = items_list[item_count]['id']
+                                print(
+                                    f'Destination Zone UUID is {destZoneUUID}')
+
+                            item_count += 1
+
+                        data = json.load(file)
+                        temp = data
+                        entry = {"destinationInterface": {
+                            "id": f"{destZoneUUID}", "type": "SecurityZone"}}
+                        print(entry)
+                        temp.append(entry)
+
+                        with open('json_files/' + filename, "w") as file:
+                            json.dump(data, file)
+
 
 while True:
     print('Author: Trevor Patch')
