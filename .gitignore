@@ -1,0 +1,9 @@
+# "#" - Marks line as a Comment
+# "*" - Matches 0 or more characters
+# "?" - Matches 1 character
+# "[abc]" = Matches "a", "b", or "c"
+# "**" matches nested directories - a /**/z matches
+
+###############################################################################
+
+.gitattributes
